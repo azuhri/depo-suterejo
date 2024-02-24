@@ -17,6 +17,10 @@ Route::get("/", function() {
     return "hello world";
 });
 
+Route::get("/hello", function() {
+    return view("hellow");
+});
+
 Route::get("pertambahan", function() {
     $number = 10 +10;
     return " 10 + 10 = ".$number;
