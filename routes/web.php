@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get("/", function() {
-    return "hello world";
+    return redirect()->route("auth.login");
 });
 
 Route::get("/hello", function() {
@@ -28,4 +29,11 @@ Route::get("pertambahan", function() {
 
 Route::get('/landing-page', function () {
     return view('welcome');
+});
+
+Route::prefix("auth")->name("auth.")->group(function() {
+    Route::controller(AuthController::class)->group(function() {
+        Route::get("login", "viewLogin")->name("login");
+        Route::get("register", "viewRegister")->name("register");
+    });
 });
