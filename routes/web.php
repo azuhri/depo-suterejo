@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\LandingPageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,20 +16,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get("/", function() {
-    return redirect()->route("auth.login");
+    return redirect()->route("landing.home");
 });
 
-Route::get("/hello", function() {
-    return view("hellow");
-});
-
-Route::get("pertambahan", function() {
-    $number = 10 +10;
-    return " 10 + 10 = ".$number;
-});
-
-Route::get('/landing-page', function () {
-    return view('welcome');
+Route::prefix("landing-page")->name("landing.")->group(function() {
+    Route::controller(LandingPageController::class)->group(function() {
+        Route::get("home", "homeView")->name("home");
+        Route::get("about-us", "aboutusView")->name("aboutus");
+        Route::get("services", "servicesView")->name("services");
+        Route::get("blog", "blogView")->name("blog");
+    });
 });
 
 Route::prefix("auth")->name("auth.")->group(function() {
