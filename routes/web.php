@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LandingPageController;
 use Illuminate\Support\Facades\Route;
 
@@ -31,6 +32,19 @@ Route::prefix("landing-page")->name("landing.")->group(function() {
 Route::prefix("auth")->name("auth.")->group(function() {
     Route::controller(AuthController::class)->group(function() {
         Route::get("login", "viewLogin")->name("login");
+        Route::post("login", "login")->name("login.post");
+
         Route::get("register", "viewRegister")->name("register");
+        Route::post("register", "register")->name("register.post");
     });
+});
+
+Route::group(["middleware" => "auth"], function() {
+    Route::prefix("account")->name("account.")->group(function() {
+        Route::controller(DashboardController::class)->group(function() {
+            Route::get("/", "mainPageView")->name("main-page");
+            Route::get("/logout", "logout")->name("logout");
+        });
+    });
+
 });

@@ -11,11 +11,12 @@
     <div class="relative bg-cover bg-center h-screen" style="background-image: url('{{asset("images/bg-login.png")}}')">
         <div class="fixed h-screen w-full bg-gray-900 z-5 opacity-50"></div>
         <div class="fixed h-screen w-full z-6 flex justify-center items-center">
-            <div>
+            <div class="px-10">
                 <p class="text-4xl text-white text-center w-full">Masuk</p>
-                <form action="" class="my-6">
-                    <input type="text" class="w-full backdrop-blur-lg placeholder-white font-bold bg-white bg-opacity-50 text-white my-4 p-4 px-6 rounded-full" placeholder="Nama pengguna/nomor telepon">
-                    <input type="password" class="w-full backdrop-blur-lg placeholder-white font-bold bg-white bg-opacity-50 text-white my-4 p-4 px-6 rounded-full" placeholder="Kata sandi">
+                <form action="{{route('auth.login.post')}}" method="POST" class="my-6">
+                    @csrf
+                    <input type="text" name="username" value="{{old("username")}}" class="w-full backdrop-blur-xs placeholder-white font-normal bg-white bg-opacity-50 text-white my-4 p-4 px-6 rounded-full" placeholder="Masukan username atau nomor telepon">
+                    <input type="password" name="password" class="w-full backdrop-blur-xs placeholder-white font-normal bg-white bg-opacity-50 text-white my-4 p-4 px-6 rounded-full" placeholder="Masukan kata sandi">
                     <button class="mt-6 text-xl bg-primary w-full p-3 py-4 text-center rounded-full text-white">
                         Masuk
                     </button>
@@ -25,5 +26,31 @@
         </div>
     </div>
     {{-- <img src="{{asset("images/bg-login.png")}}" alt=""> --}}
+    <script src="{{ asset('js/jquery3.7.js') }}"></script>
+    <script src="{{ asset('js/toaster.js') }}"></script>
+    <script>
+         @if (session('success'))
+            vt.success("{{ session('success') }}", {
+                title: "Notifikasi",
+                position: "top-center",
+                // position: toastPosition.TopCenter,
+                duration: 8000,
+                closable: false,
+                focusable: false,
+                callback: undefined
+            })
+        @endif
+        @if (session('error'))
+            vt.error("{{ session('error') }}", {
+                title: "Peringatan!",
+                position: "top-center",
+                // position: toastPosition.TopCenter,
+                duration: 8000,
+                closable: false,
+                focusable: false,
+                callback: undefined
+            })
+        @endif
+    </script>
 </body>
 </html>

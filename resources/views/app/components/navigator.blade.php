@@ -5,10 +5,10 @@
     </div>
     <div class="col-span-3 flex justify-center items-center">
         <ul class="flex">
-            <li class="mx-4">Beranda</li>
-            <li class="mx-4">Tentang Kami</li>
-            <li class="mx-4">Layanan</li>
-            <li class="mx-4">Blog</li>
+            <li class="mx-4 border-b border-white pb-2"><a href="#">Beranda</a></li>
+            <li class="mx-4"><a href="#">Tentang Kami</a></li>
+            <li class="mx-4"><a href="#">Layanan</a></li>
+            <li class="mx-4"><a href="#">Blog</a></li>
         </ul>
     </div>
     <div class="col-span-1 flex justify-end items-center">
