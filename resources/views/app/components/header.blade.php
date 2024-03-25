@@ -35,13 +35,13 @@
                         src="https://ui-avatars.com/api/?name={{Auth::user()->email}}&background=FFFFFF&secondary=1F448B" alt="">
                 </div>
                 <ul tabindex="0" class="dropdown-content z-[1] menu p-2 border shadow bg-base-100 rounded-box w-52">
-                    <li class="text-{{$secondary}} font-bold">
+                    <li class="text-primary font-bold">
                         <a href="#">Profil</a>
                     </li>
-                    <li class="text-{{$secondary}} font-bold">
+                    <li class="text-primary font-bold">
                         <a href="#">Riwayat Transaksi</a>
                     </li>
-                    <li class="text-{{$secondary}} font-bold flex">
+                    <li class="text-primary font-bold flex">
                         <form class="w-full flex" action="{{route('account.logout')}}" method="POST">
                             @csrf
                             <button class="w-full text-left" type="submit">Keluar</button>
