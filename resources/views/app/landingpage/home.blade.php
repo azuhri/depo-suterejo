@@ -5,11 +5,23 @@
 @endsection
 
 @section('hero')
-images/bg-home.png
 @endsection
 
 @section('content')
-    <div class="mb-20 mb-30 px-32">
+    {{-- Hero --}}
+    <div class="w-full bg-cover bg-center h-screen relative flex justify-center">
+        <img class="w-full max-h-[92vh] absolute z-0" src="{{ asset('images/bg-home3.png') }}" alt="">
+        <div class="relative z-1 flex flex-col items-center">
+            <p class="text-5xl text-white font-medium mt-32 mb-5 text-center">
+                Selamatkan Lingkunganmu!
+            </p>
+            <p class="text-lg w-3/4 text-white text-center">
+                Setiap sampah yang kamu jual ke kami, akan didaur ulang menjadi produk tebarukan lho.
+                Jangan ragu-ragu untuk menyelamatkan lingkungan bersama Solusisampah!
+            </p>
+        </div>
+    </div>
+    {{-- <div class="mb-20 mb-30 px-32">
         <p class="text-4xl text-center font-bold text-primary">TENTANG KAMI</p>
         <p class="my-4 text-xl px-32 text-justify font-light">
             Super Depo Sutorejo merupakan depo pengolahan sampah modern yang ada di Surabaya. Dikatakan modern karena depo
@@ -19,6 +31,23 @@ images/bg-home.png
             ketersediaan sarana dan prasarana padaSuper Depo Sutorejo untuk mendukung aktivitas pemilahan sampah sudah
             terpenuhi.
         </p>
+    </div> --}}
+    <div class="my-32 mb-40 flex justify-center">
+        <div class="w-4/5 flex">
+            <div class="flex flex-col justify-center px-20">
+                <p class="text-2xl font-bold text-primary text-justify">
+                    Misi Kami Menyediakan Akses Penjemputan Sampah Secara Digital Untuk Masa Depan yang Lebih Bersih
+                </p>
+                <p class="text-md font-light text-gray my-4 text-justify">
+                    Cukup pilih sampahmu, lalu pilih lokasi penjemputan, picker kami akan darang ke rumahmu untuk mengambil
+                    sampah. Dengan menggunakan Solusisampah, kamu sudah membantu menanggulangi permasalahan sampah di
+                    lingkunganmu.
+                </p>
+            </div>
+            <div>
+                <img class="rounded-3xl w-[1500px]" src="{{ asset('images/home-img1.png') }}" alt="">
+            </div>
+        </div>
     </div>
     <div class="my-20 mb-30 py-32 bg-primary">
         <p class="text-4xl text-center font-bold text-white">LAYANAN</p>
@@ -54,7 +83,9 @@ images/bg-home.png
                     </p>
                 </div>
                 <div class="flex justify-center w-full">
-                    <a href="#" class="rounded-xl bg-white border border-primary text-primary p-2 mb-6 px-4 text-xs">Baca Selengkapnya</a>
+                    <a href="#"
+                        class="rounded-xl bg-white border border-primary text-primary p-2 mb-6 px-4 text-xs">Baca
+                        Selengkapnya</a>
                 </div>
             </div>
             <div class="p-1 my-4 w-1/4 rounded-3xl shadow-xl border border-2 mx-2">
@@ -71,7 +102,9 @@ images/bg-home.png
                     </p>
                 </div>
                 <div class="flex justify-center w-full">
-                    <a href="#" class="rounded-xl bg-white border border-primary text-primary p-2 mb-6 px-4 text-xs">Baca Selengkapnya</a>
+                    <a href="#"
+                        class="rounded-xl bg-white border border-primary text-primary p-2 mb-6 px-4 text-xs">Baca
+                        Selengkapnya</a>
                 </div>
             </div>
             <div class="p-1 my-4 w-1/4 rounded-3xl shadow-xl border border-2 mx-2">
@@ -88,7 +121,9 @@ images/bg-home.png
                     </p>
                 </div>
                 <div class="flex justify-center w-full">
-                    <a href="#" class="rounded-xl bg-white border border-primary text-primary p-2 mb-6 px-4 text-xs">Baca Selengkapnya</a>
+                    <a href="#"
+                        class="rounded-xl bg-white border border-primary text-primary p-2 mb-6 px-4 text-xs">Baca
+                        Selengkapnya</a>
                 </div>
             </div>
         </div>

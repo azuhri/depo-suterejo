@@ -42,8 +42,7 @@ Route::prefix("auth")->name("auth.")->group(function() {
 Route::group(["middleware" => "auth"], function() {
     Route::prefix("account")->name("account.")->group(function() {
         Route::controller(DashboardController::class)->group(function() {
-            Route::get("/", "mainPageView")->name("main-page");
-            Route::get("/logout", "logout")->name("logout");
+            Route::post("/logout", "logout")->name("logout");
         });
     });
 

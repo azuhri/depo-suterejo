@@ -30,10 +30,10 @@ class AuthController extends Controller
                 "password" => "Maaf.. kata sandi masih belum diisi!",
             ]);
             if ($this->seviceUser->loginWithEmail($request->username, $request->password))
-                return redirect()->route("account.main-page")->with("success", "Anda berhasil masuk ke Akun Anda");;
+                return redirect()->route("landing.home")->with("success", "Anda berhasil masuk ke Akun Anda");;
 
             if ($this->seviceUser->loginWithPhonenumber($request->username, $request->password))
-                return redirect()->route("account.main-page")->with("success", "Anda berhasil masuk ke Akun Anda");;
+                return redirect()->route("landing.home")->with("success", "Anda berhasil masuk ke Akun Anda");;
 
             return redirect()->back()->with("error", "Maaf.. username atau nomor HP dan password salah")->withInput();
         } catch (\Throwable $th) {

@@ -12,18 +12,29 @@
 
 <body>
     {{-- Navigator --}}
-    @include('app.components.navigator')
-
-    {{-- Hero --}}
-    <div class="w-full bg-cover bg-center h-screen">
-        <img class="w-full max-h-[92vh]" src="{{url('/')}}/@yield("hero")" alt="">
-    </div>
+    @include('app.components.header')
 
     {{-- Content --}}
     @yield('content')
 
     {{-- Footer --}}
     @include("app.components.footer")
+    <script src="{{ asset('js/jquery3.7.js') }}"></script>
+    <script src="{{ asset('js/toaster.js') }}"></script>
+    <script>
+        @if (session('success'))
+           vt.success("{{ session('success') }}", {
+               title: "Notifikasi",
+               position: "bottom-right",
+               // position: toastPosition.TopCenter,
+               duration: 4000,
+               closable: false,
+               focusable: false,
+               callback: undefined
+           })
+       @endif
+   </script>
+   @yield('js')
 </body>
 
 </html>
