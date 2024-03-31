@@ -33,11 +33,6 @@ class UserService implements InterfaceUserService{
             throw new Exception("Terjadi error saat registrasi");
         }
 
-        // Auth::attempt([
-        //     "email" => $request->email,
-        //     "password" => $request->password,
-        // ]);
-
         return $user;
     }
 

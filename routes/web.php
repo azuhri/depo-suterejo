@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardAdminController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LandingPageController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -45,5 +47,19 @@ Route::group(["middleware" => "auth"], function() {
             Route::post("/logout", "logout")->name("logout");
         });
     });
+});
 
+
+Route::prefix("admin")->name("admin.")->group(function() {
+    Route::get("login", [AuthController::class, "loginAdminView"])->name("login.view");
+    Route::post("login", [AuthController::class, "loginAdmin"])->name("login.post");
+    Route::middleware("admin")->group(function() {
+        Route::prefix("dashboard")->name("dashboard.")->group(function() {
+            Route::controller(DashboardAdminController::class)->group(function() {
+                Route::get("/","adminDashboardView")->name("index");
+                Route::post("logout","logout")->name("logout");
+                Route::get("/data-sampah","dataSampahView")->name("trash.index");
+            });
+        });
+    });
 });

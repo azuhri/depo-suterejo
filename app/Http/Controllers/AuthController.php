@@ -2,16 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Services\AdminService;
+use App\Http\Services\RedirectHandlingErrorService;
 use App\Http\Services\UserService;
 use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
-    public UserService $seviceUser;
+    public UserService $serviceUser;
+    public RedirectHandlingErrorService $redirectHandlingError;
+    public AdminService $serviceAdmin;
 
-    public function __construct(UserService $userService)
+    public function __construct(
+        UserService $userService, 
+        AdminService $adminService,
+        RedirectHandlingErrorService $redirectHandlingError
+    )
     {
-        $this->seviceUser = $userService;
+        $this->serviceUser = $userService;
+        $this->serviceAdmin = $adminService;
+        $this->redirectHandlingError = $redirectHandlingError;
     }
 
     public function viewLogin()
@@ -29,10 +39,10 @@ class AuthController extends Controller
                 "username" => "Maaf.. email atau username masih belum diisi!",
                 "password" => "Maaf.. kata sandi masih belum diisi!",
             ]);
-            if ($this->seviceUser->loginWithEmail($request->username, $request->password))
+            if ($this->serviceUser->loginWithEmail($request->username, $request->password))
                 return redirect()->route("landing.home")->with("success", "Anda berhasil masuk ke Akun Anda");;
 
-            if ($this->seviceUser->loginWithPhonenumber($request->username, $request->password))
+            if ($this->serviceUser->loginWithPhonenumber($request->username, $request->password))
                 return redirect()->route("landing.home")->with("success", "Anda berhasil masuk ke Akun Anda");;
 
             return redirect()->back()->with("error", "Maaf.. username atau nomor HP dan password salah")->withInput();
@@ -71,10 +81,23 @@ class AuthController extends Controller
                 "phonenumber" => "Maaf.. no HP masih belum diisi!",
                 "name" => "Maaf.. nama masih belum diisi!",
             ]);
-            $user = $this->seviceUser->register($request);
+            $user = $this->serviceUser->register($request);
             return \redirect()->route("auth.login")->with("success", "Anda berhasil membuat akun, silahkan masuk dengan akun Anda");
         } catch (\Throwable $th) {
             return \redirect()->back()->with("error", $th->getMessage())->withInput();
+        }
+    }
+
+    public function loginAdminView() {
+        return view("app.admin.login");
+    }
+
+    public function loginAdmin(Request $request){
+        try {
+            $this->serviceAdmin->loginAdmin($request);
+            return redirect()->route("admin.dashboard.index");
+        } catch (\Throwable $th) {
+            return $this->redirectHandlingError->redirectBackFlashErrorWithMessage("error", $th->getMessage());
         }
     }
 }
