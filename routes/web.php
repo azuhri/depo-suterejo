@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardAdminController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DataTrashController;
 use App\Http\Controllers\LandingPageController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -59,6 +60,20 @@ Route::prefix("admin")->name("admin.")->group(function() {
                 Route::get("/","adminDashboardView")->name("index");
                 Route::post("logout","logout")->name("logout");
                 Route::get("/data-sampah","dataSampahView")->name("trash.index");
+            });
+            
+            Route::prefix("data-sampah")->controller(DataTrashController::class)
+            ->name("trash.")
+            ->group(function(){
+                Route::post("kategori-sampah", "newTrashCategory")->name("new-category");
+                Route::get("kategori-sampah", "getAllDataTrashCategory")->name("get-categories");
+                Route::delete("kategori-sampah", "deleteTrashCategory")->name("delete-category");
+                Route::post("kategori-sampah/update", "updateTrashCategory")->name("update-category");
+
+                Route::post("sub-sampah", "newSubTrash")->name("new-sub-trash");
+                Route::delete("sub-sampah", "deleteTrash")->name("delete-sub-trash");
+                Route::get("sub-sampah", "getAllDataTrash")->name("get-sub-trash");
+                Route::put("sub-sampah", "updateSubTrash")->name("update-sub-trash");
             });
         });
     });

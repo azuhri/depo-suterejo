@@ -1,6 +1,33 @@
 {
+  "resources/assets/css/luno-style.css": {
+    "file": "assets/luno-style-Bp6v_gRW.css",
+    "src": "resources/assets/css/luno-style.css",
+    "isEntry": true
+  },
+  "resources/assets/js/plugins.js": {
+    "file": "assets/plugins-Cx0sEBoz.js",
+    "src": "resources/assets/js/plugins.js",
+    "isEntry": true
+  },
+  "resources/assets/js/theme.js": {
+    "file": "assets/theme-B3o2jal1.js",
+    "src": "resources/assets/js/theme.js",
+    "isEntry": true
+  },
+  "resources/assets/vendor/fancybox/source/fancybox_overlay.png": {
+    "file": "assets/fancybox_overlay-BGenbtmv.png",
+    "src": "resources/assets/vendor/fancybox/source/fancybox_overlay.png"
+  },
+  "resources/assets/vendor/fancybox/source/fancybox_sprite.png": {
+    "file": "assets/fancybox_sprite-DVCQrgao.png",
+    "src": "resources/assets/vendor/fancybox/source/fancybox_sprite.png"
+  },
+  "resources/assets/vendor/jsgrid/icons.png": {
+    "file": "assets/icons-DKARTte9.png",
+    "src": "resources/assets/vendor/jsgrid/icons.png"
+  },
   "resources/css/app.css": {
-    "file": "assets/app-DcGiafKf.css",
+    "file": "assets/app-Ccx8PkZq.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },

@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger("trash_category_id")->index();
             $table->foreign("trash_category_id")->references("id")->on("trash_categories");
+            $table->integer("minimum_price");
+            $table->integer("maximum_price");
             $table->string("name", 50);
             $table->timestamps();
         });

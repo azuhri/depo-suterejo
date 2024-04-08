@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('trash_categories', function (Blueprint $table) {
             $table->id();
             $table->string("name", 50)->index();
+            $table->string("path_image")->nullable();
             $table->timestamps();
         });
     }

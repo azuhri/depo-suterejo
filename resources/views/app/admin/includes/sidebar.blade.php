@@ -2,10 +2,8 @@
   <div class="sidebar p-2 py-md-3 @@cardClass">
       <div class="container-fluid">
           <!-- sidebar: title-->
-          <div class="title-text mb-4 mt-1">
-              <h4 style="font-weight:bold"
-                  class="sidebar-title text-secondary text-center mb-0 flex-grow-1 text-uppercase">Solusi Sampah</h4>
-              <p class="sidebar-title text-primary text-center mb-0 flex-grow-1 text-uppercase">Dashboard Admin</p>
+          <div class="title-text card p-2 mb-4 mt-1 d-flex flex-column align-items-center justify-content-center">
+              <img class="w-50" src="{{asset("images/recycle2.png")}}" alt="">
           </div>
           <!-- sidebar: menu list -->
           <div class="main-menu flex-grow-1">
@@ -13,7 +11,7 @@
                   <li class="divider py-2 lh-sm"><span class="small">Dashboard Saya</span><br> <small
                           class="text-muted">Daftar Fitur Utama </small></li>
                   <li class="collapsed">
-                      <a class="m-link collapsed"
+                      <a class="m-link {{url()->current() == route('admin.dashboard.index') ? "active" : ""  }}"
                           href="{{route('admin.dashboard.index')}}" aria-expanded="false">
                           <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="currentColor"
                               viewBox="0 0 16 16">
@@ -28,7 +26,7 @@
                       </a>
                   </li>
                   <li class="collapsed">
-                      <a class="m-link" href="{{route('admin.dashboard.trash.index')}}">
+                      <a class="m-link {{url()->current() == route('admin.dashboard.trash.index') ? "active" : ""  }}" href="{{route('admin.dashboard.trash.index')}}">
                           <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2"
                               fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1">
                               <polyline points="3 6 5 6 21 6"></polyline>
