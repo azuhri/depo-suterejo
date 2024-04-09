@@ -98,7 +98,7 @@
     </div>
     @include('app.admin.includes.settings')
 
-    @vite('assets/bundles/libscripts.bundle.js')
+    <script src="{{ asset('js/bundles/libscripts.bundle.js') }}"></script>
     @vite('resources/assets/js/theme.js')
     <script src="{{ asset('js/toaster.js') }}"></script>
     <script>

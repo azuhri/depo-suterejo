@@ -9,7 +9,7 @@ export default defineConfig({
                 'resources/assets/css/luno-style.css',
                 'resources/js/app.js',
                 'resources/assets/js/plugins.js',
-                'resources/assets/js/theme.js'
+                'resources/assets/js/theme.js',
             ],
             refresh: true,
         }),
