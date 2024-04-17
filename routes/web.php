@@ -7,6 +7,7 @@ use App\Http\Controllers\DataTrashController;
 use App\Http\Controllers\LandingPageController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,7 +45,10 @@ Route::prefix("auth")->name("auth.")->group(function() {
 
 Route::group(["middleware" => "auth"], function() {
     Route::prefix("account")->name("account.")->group(function() {
+        Route::get("services/option", [LandingPageController::class, "servicesOptionIndex"])->name("services.option");
         Route::controller(DashboardController::class)->group(function() {
+            Route::post("services", "submitDataRequestService")->name("services.post");
+            Route::get("services/payment", "serviceNextStepIndex")->name("services.next.index");
             Route::post("/logout", "logout")->name("logout");
         });
     });

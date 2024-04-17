@@ -1,6 +1,6 @@
-<footer class="bg-primary py-20 px-[250px] text-white flex flex-col justify-center items-center">
+<footer class="bg-primary py-20 p-4 lg:px-[250px] text-white flex flex-col justify-center items-center">
     <div class="flex justify-center items-center">
-        <div class="mr-[150px]">
+        <div class="lg:block hidden mr-[150px]">
             <img class="w-[150px]" src="{{ asset('images/recycle.png') }}" alt="">
         </div>
         <div class="">
@@ -14,18 +14,18 @@
                 <a class="mx-4" href="#">Blog</a>
             </div>
             <div class="flex my-10">
-                <div class="ml-4 mr-6">
+                <div class="ml-4 mr-3 lg:mr-6">
                     <p class="mb-4">Kontak Kami</p>
                     <p class="text-xs">superdepo@gmail.com</p>
                     <p class="text-xs">+62 812 3456 7890 </p>
                 </div>
-                <div class="ml-4 mr-6">
+                <div class="ml-4 mr-3 lg:mr-6">
                     <p class="mb-4">Lokasi</p>
                     <p class="text-xs">Jl. Kalisari Timur, Kalisari,</p>
                     <p class="text-xs">Kec. Mulyorejo, Surabaya, </p>
                     <p class="text-xs"> Jawa Timur 60113</p>
                 </div>
-                <div class="ml-4 mr-6">
+                <div class="ml-4 mr-3 lg:mr-6">
                     <p class="mb-4">Media Sosial</p>
                     <p class="text-xs">Instagram</p>
                     <p class="text-xs">WhatsApp</p>
@@ -34,7 +34,7 @@
         </div>
     </div>
     <div class="mt-20 mb-4">
-        <p class="text-xs">The Super Depo Sutorejo Surabaya (SDSS) Project was created to separate household waste into fractions, but its separation effect is unknown. This study assessed the significance of the project in sorting general waste into biodegradable, non-biodegradable, and assorted. </p>
+        <p class="text-xs text-center">The Super Depo Sutorejo Surabaya (SDSS) Project was created to separate household waste into fractions, but its separation effect is unknown. This study assessed the significance of the project in sorting general waste into biodegradable, non-biodegradable, and assorted. </p>
     </div>
 
     <div class="border-b w-full border-white">&nbsp;</div>

@@ -17,8 +17,8 @@ return new class extends Migration
             $table->foreign("user_id")->references("id")->on("users");
             $table->string("title", 50);
             $table->longText("detail_address");
-            $table->string("longitude")->index();
-            $table->string("latitude")->index();
+            $table->double("longitude")->index()->nullable();
+            $table->double("latitude")->index()->nullable();
             $table->timestamps();
         });
     }

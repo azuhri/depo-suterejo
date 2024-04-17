@@ -13,10 +13,10 @@
 @endphp
 
 
-<header class="flex w-full p-4 px-20 bg-{{$primary}} shadow-lg text-{{$primary}} grid grid-cols-5">
+<header class="hidden md:flex w-full p-4 px-20 bg-{{$primary}} shadow-lg md:grid md:grid-cols-5">
     <div class="flex items-center col-span-1">
         <img src="{{ asset('images/recycle.png') }}" alt="">
-        <span class="ml-2 font-bold text-{{$primary}}">Solusi Sampah</span>
+        <span class="ml-2 font-bold  text-{{$secondary}}">Solusi Sampah</span>
     </div>
     <div class="col-span-3 text-{{$secondary}} flex justify-center items-center">
         <ul class="flex">

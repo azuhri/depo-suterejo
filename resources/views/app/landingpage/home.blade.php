@@ -10,7 +10,7 @@
 @section('content')
     {{-- Hero --}}
     <div class="w-full bg-cover bg-center h-screen relative flex justify-center">
-        <img class="w-full max-h-[92vh] absolute z-0" src="{{ asset('images/bg-home3.png') }}" alt="">
+        <img class="w-full max-h-[92vh] min-h-full absolute z-0" src="{{ asset('images/bg-home3.png') }}" alt="">
         <div class="relative z-1 flex flex-col items-center">
             <p class="text-5xl text-white font-medium mt-32 mb-5 text-center">
                 Selamatkan Lingkunganmu!
@@ -33,9 +33,9 @@
         </p>
     </div> --}}
     <div class="my-32 mb-40 flex justify-center">
-        <div class="w-4/5 flex">
-            <div class="flex flex-col justify-center px-20">
-                <p class="text-2xl font-bold text-primary text-justify">
+        <div class="w-4/5 flex flex-col-reverse md:flex-row">
+            <div class="flex flex-col justify-center my-4 md:px-20">
+                <p class="text-2xl  font-bold text-primary text-justify">
                     Misi Kami Menyediakan Akses Penjemputan Sampah Secara Digital Untuk Masa Depan yang Lebih Bersih
                 </p>
                 <p class="text-md font-light text-gray my-4 text-justify">
@@ -51,16 +51,16 @@
     </div>
     <div class="my-20 mb-30 py-32 bg-primary">
         <p class="text-4xl text-center font-bold text-white">LAYANAN</p>
-        <div class="flex justify-center">
-            <div class="flex flex-col justify-center w-1/6 mt-10 mx-20">
+        <div class="flex justify-center items-center flex-col-reverse md:flex-row">
+            <div class="flex flex-col justify-center w-3/4 md:w-1/2 md:w-1/6 mt-10 mx-20">
                 <img class="rounded-3xl" src="{{ asset('images/service-1.png') }}" alt="">
                 <p class="text-center mt-4 text-white text-2xl font-normal">Jemput Sampah</p>
             </div>
-            <div class="flex flex-col justify-center w-1/6 mt-10 mx-20">
+            <div class="flex flex-col justify-center w-3/4 md:w-1/2 md:w-1/6 mt-10 mx-20">
                 <img class="rounded-3xl" src="{{ asset('images/service-3.png') }}" alt="">
                 <p class="text-center mt-4 text-white text-2xl font-normal">Kerjasama Mitra</p>
             </div>
-            <div class="flex flex-col justify-center w-1/6 mt-10 mx-20">
+            <div class="flex flex-col justify-center w-3/4 md:w-1/2 md:w-1/6 mt-10 mx-20">
                 <img class="rounded-3xl" src="{{ asset('images/service-2.png') }}" alt="">
                 <p class="text-center mt-4 text-white text-2xl font-normal">Servis Kebersihan</p>
             </div>
@@ -68,8 +68,8 @@
     </div>
     <div class="my-20">
         <p class="text-4xl text-center font-bold text-primary">BLOG</p>
-        <div class="flex justify-center mt-10">
-            <div class="p-1 my-4 w-1/4 rounded-3xl shadow-xl border border-2 mx-2">
+        <div class="flex md:flex-row flex-col items-center justify-center mt-10">
+            <div class="p-1 my-4 w-3/4 md:w-1/4 rounded-3xl shadow-xl border border-2 mx-2">
                 <img class="rounded-3xl p-1 w-full" src="{{ asset('images/blog-1.png') }}" alt="">
                 <div class="my-1 p-4">
                     <p class="font-bold">
@@ -88,7 +88,7 @@
                         Selengkapnya</a>
                 </div>
             </div>
-            <div class="p-1 my-4 w-1/4 rounded-3xl shadow-xl border border-2 mx-2">
+            <div class="p-1 my-4 w-3/4 md:w-1/4 rounded-3xl shadow-xl border border-2 mx-2">
                 <img class="rounded-3xl p-1 w-full" src="{{ asset('images/blog-2.png') }}" alt="">
                 <div class="my-1 p-4">
                     <p class="font-bold">
@@ -107,7 +107,7 @@
                         Selengkapnya</a>
                 </div>
             </div>
-            <div class="p-1 my-4 w-1/4 rounded-3xl shadow-xl border border-2 mx-2">
+            <div class="p-1 my-4 w-3/4 md:w-1/4 rounded-3xl shadow-xl border border-2 mx-2">
                 <img class="rounded-3xl p-1 w-full" src="{{ asset('images/blog-1.png') }}" alt="">
                 <div class="my-1 p-4">
                     <p class="font-bold">

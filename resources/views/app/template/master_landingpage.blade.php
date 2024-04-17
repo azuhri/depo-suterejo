@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 
 <head>
     <meta charset="UTF-8">
@@ -8,6 +8,7 @@
     {{-- Title --}}
     <title>@yield('title') | Depo Sutorejo</title>
     @vite('resources/css/app.css')
+    @yield('css')
 </head>
 
 <body>

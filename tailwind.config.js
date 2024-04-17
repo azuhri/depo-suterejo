@@ -6,6 +6,7 @@ module.exports = {
         "./node_modules/flowbite/**/*.js",
     ],
     theme: {
+        darkMode: false,
         extend: {
             fontFamily: {
                 sans: ["Plus Jakarta Sans", "sans-serif"],
@@ -34,6 +35,9 @@ module.exports = {
                 // secondary: "#F2CA13",
                 // "secondary-10": "#FCF4D0",
             },
+        },
+        daisyui: {
+            themes: ["light", "dark", "cupcake" ,"cyberpunk"],
         },
     },
     plugins: [require("daisyui")],
