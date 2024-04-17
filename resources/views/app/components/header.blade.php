@@ -30,7 +30,7 @@
         @if (Auth::user())
             <div class="dropdown dropdown-end">
                 <div tabindex="0" role="button" class="font-semibold text-{{$secondary}} flex text-sm m-1 items-center">
-                    <span class="mx-2">Azis Zuhri Pratomo</span>
+                    <span class="mx-2">{{Auth::user()->name}}</span>
                     <img class="border border-{{$secondary}} border-gray-800 w-[40px] rounded-full"
                         src="https://ui-avatars.com/api/?name={{Auth::user()->email}}&background=FFFFFF&secondary=1F448B" alt="">
                 </div>
