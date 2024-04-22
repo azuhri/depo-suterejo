@@ -12,7 +12,14 @@ class DataTransaction extends Controller
         $status = $request->status;
         $limit = $request->limit;
     
-        $transaction = Transaction::query()->with(["detail", "address", "assets","user"]);
+        $transaction = Transaction::query()->with([
+                "detail",
+                "address" => function ($query) {
+                    $query->withTrashed();
+                },
+                "assets",
+                "user"
+        ]);
         $transaction->where("order_date", "=", $orderDate);
     
         if($status != "*") {

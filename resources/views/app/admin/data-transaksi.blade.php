@@ -16,6 +16,7 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/css/bootstrap-datepicker3.min.css"
         integrity="sha512-aQb0/doxDGrw/OC7drNaJQkIKFu6eSWnVMAwPN64p6sZKeJ4QCDYL42Rumw2ZtL8DB9f66q4CnLIUnAw28dEbg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     {{-- <link rel="stylesheet" href="{{ asset('/cssbundle/select2.min.css') }}"> --}}
 @endsection
 
@@ -67,8 +68,8 @@
                             <line x1="3" y1="10" x2="21" y2="10"></line>
                         </svg>
                     </span>
-                    <input type="text" onchange="filterDate(this)" id="datepicker" class="datepicker text-center border" class="form-control"
-                        aria-describedby="basic-addon1">
+                    <input type="text" value="{{ date('d F Y') }}" onchange="filterDate(this)" id="datepicker"
+                        class="datepicker text-center border" class="form-control" aria-describedby="basic-addon1">
                 </div>
             </div>
             <div class="d-flex">
@@ -87,7 +88,8 @@
                         <tr>
                             <th class="text-center">#</th>
                             <th class="text-center">Nama Pengguna</th>
-                            <th class="text-center">Tanggal Order</th>
+                            <th class="text-center">Tanggal Penjemputan</th>
+                            <th class="text-center">Waktu Penjemputan</th>
                             <th class="text-center">Total Berat</th>
                             <th class="text-center">Estimasi Harga</th>
                             <th class="text-center">Lokasi</th>
@@ -126,7 +128,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/js/bootstrap-datepicker.min.js"
         integrity="sha512-LsnSViqQyaXpD4mBBdRYeP6sRwJiJveh2ZIbW41EBrNmKxgr/LFZIiWT6yr+nycvhvauz8c2nYMhrP80YhG7Cw=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment-with-locales.min.js"
+        integrity="sha512-4F1cxYdMiAW98oomSLaygEwmCnIP38pb4Kx70yQYqRwLVCs3DbRumfBq82T08g/4LJ/smbFGFpmeFlQgoDccgg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
         $(".datepicker").datepicker({
             format: 'dd MM yyyy',
@@ -159,15 +163,21 @@
                                     <p class="m-0">${val.user.name}</p>
                                     <small class="text-success m-0" style="font-weight:bold;">${val.order_number}</small>
                                 </div>
-                                    <button class="btn btn-sm btn-info text-white">DIPROSES</button>
+                                    <button class="btn btn-sm btn-secondary text-white" style="font-size:12px;">DIPROSES</button>
                             </td>
-                            <td class="text-uppercase text-center">${val.order_date}</td>
+                            <td class="text-uppercase text-center">${moment(val.order_date).format("DD MMMM Y")}</td>
+                            <td class="text-uppercase text-center">${val.range_time}</td>
                             <td class="text-uppercase text-center">${val.weight_kg}kg</td>
                             <td class="text-center"><span class="mx-1 btn btn-light-danger">Rp.${convertToRupiah(val.estimate_amount_minimum)} </span>-<span class="mx-1 btn btn-light-success"> Rp.${convertToRupiah(val.estimate_amount_maximum)}</span></td>
                             <td class="text-uppercase text-center">
-                                <a href="https://maps.google.com/maps?q=${val.address.latidue},${val.address.longitude}&hl=ID&z=10" target="_blank" class="btn btn-dark btn-sm">
-                                    <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon><line x1="8" y1="2" x2="8" y2="18"></line><line x1="16" y1="6" x2="16" y2="22"></line></svg>
-                                </a>    
+                                ${
+                                    val.address.longitude?
+                                    `<a href="https://maps.google.com/maps?q=${val.address.latidue},${val.address.longitude}&hl=ID&z=10" target="_blank" class="btn btn-dark btn-sm">
+                                        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon><line x1="8" y1="2" x2="8" y2="18"></line><line x1="16" y1="6" x2="16" y2="22"></line></svg>
+                                    </a>`:
+                                    "<p class='text-muted font-italic'>-- NO MAP --</p>"
+                                }
+                                
                             </td>
                             <td class="text-center">
                                 <button class="btn btn-light-secondary">
@@ -178,7 +188,7 @@
                         });
                     } else {
                         tempListData = `<tr>
-                            <td colspan="7">
+                            <td colspan="8">
                                 <div class="card my-1 flex-row d-flex align-items-center justify-content-center w-100">
                                   <p class="p-0 m-0 text-muted">-- Data kosong --</p>
                                 </div>   
@@ -203,12 +213,12 @@
             orderDate = $(self).val();
             getDatatable(`?limit=${limit}&orderDate=${orderDate}&status=${status}`);
         }
-        
+
         const filterStatus = self => {
             status = $(self).val();
             getDatatable(`?limit=${limit}&orderDate=${orderDate}&status=${status}`);
         }
-        
+
         function convertToRupiah(angka) {
             var rupiah = '';
             var angkarev = angka.toString().split('').reverse().join('');

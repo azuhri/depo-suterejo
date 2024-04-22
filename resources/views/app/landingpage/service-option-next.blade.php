@@ -414,7 +414,7 @@
                 notes,
                 _token: "{{ csrf_token() }}",
             }
-            if (location === "true" && id !== "") {
+            if ((location === "true" && id !== "") || (location === "true" && id === "")) {
                 data.longitude = longitude;
                 data.latitude = latitude;
             }
@@ -460,7 +460,8 @@
                         $("#empty_address").remove();
                     }
                     if (id) {
-                        $("#listAddress").html(res.data);
+                        $("#listAddress").html(res.data.html_list_address);
+                        $("#addressContainer").html(res.data.html_address_container);
                     } else {
                         $("#listAddress").append(res.data.list_address_html);
                     }

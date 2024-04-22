@@ -33,8 +33,9 @@ class AddressRepository implements InterfaceAddressRepository
             "longitude" => @$request["longitude"],
             "notes" => $request["notes"],
         ];
-
-        return $this->getAddressById($request["id"])->update($params);
+        $data = $this->getAddressById($request["id"]);
+        $data->update($params);
+        return $data;
     }
 
     public function getAddressById($addressId)

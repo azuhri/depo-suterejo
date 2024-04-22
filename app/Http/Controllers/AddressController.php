@@ -21,7 +21,6 @@ class AddressController extends Controller
     }
     function createOrUpdateAddress(Request $request)
     {
-        // dd($request->all());
         try {
             $request->validate([
                 "detail_address" => ["required", "min:10"],
@@ -39,7 +38,7 @@ class AddressController extends Controller
             $params = $request->toArray();
             $params["user_id"] = Auth::user()->id;
             if ($request->id) {
-                $this->addressService->updateAddress($params);
+                $address = $this->addressService->updateAddress($params);
                 $allAddress = $this->addressService->getAllAddressUserById(Auth::user()->id);
                 $allAddress = $allAddress->sortByDesc("status");
                 $allAddress = $allAddress->values()->all();
@@ -47,7 +46,11 @@ class AddressController extends Controller
                     "app.landingpage.partials.address.group-list",
                     ["addresses" => $allAddress]
                 )->render();
-                return $this->json->responseDataWithMessage($html, "Berhasil menyimpan perubahan data alamat");
+                $data = [
+                    "html_list_address" => $html,
+                    "html_address_container" => view("app.landingpage.partials.address.address-container", ["data" => $address])->render(),
+                ];
+                return $this->json->responseDataWithMessage($data, "Berhasil menyimpan perubahan data alamat");
             }
             $data = $this->addressService->createAddress($params);
             $data->list_address_html = view("app.landingpage.partials.address.list-address", ["data" => $data])->render();
