@@ -15,7 +15,8 @@
 
 <header class="hidden md:flex w-full p-4 px-20 bg-{{$primary}} shadow-lg md:grid md:grid-cols-5">
     <div class="flex items-center col-span-1">
-        <img src="{{ asset('images/recycle.png') }}" alt="">
+        {{-- <img src="{{ asset('images/recycle.png') }}" alt=""> --}}
+        <img class="w-[40px]" src="{{asset("images/recycle2.png")}}" alt="">
         <span class="ml-2 font-bold  text-{{$secondary}}">Solusi Sampah</span>
     </div>
     <div class="col-span-3 text-{{$secondary}} flex justify-center items-center">

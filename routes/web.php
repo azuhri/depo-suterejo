@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\AddressController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardAdminController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DataTransaction;
 use App\Http\Controllers\DataTrashController;
 use App\Http\Controllers\LandingPageController;
 use Illuminate\Support\Facades\Auth;
@@ -48,8 +50,20 @@ Route::group(["middleware" => "auth"], function() {
         Route::get("services/option", [LandingPageController::class, "servicesOptionIndex"])->name("services.option");
         Route::controller(DashboardController::class)->group(function() {
             Route::post("services", "submitDataRequestService")->name("services.post");
-            Route::get("services/payment", "serviceNextStepIndex")->name("services.next.index");
+            Route::get("services/next-step", "serviceNextStepIndex")->name("services.next.index");
+            Route::post("services/next-step", "paymentService")->name("services.next.submit");
             Route::post("/logout", "logout")->name("logout");
+            Route::get("transaction-succeed", "transactionSuccedIndex")->name("transaction.succeed.index");
+            Route::view("list-transaction", "app.landingpage.list-transaction")->name("transaction.list.index");
+        });
+
+        Route::prefix("address")
+            ->name("address.")
+            ->controller(AddressController::class)
+            ->group(function() {
+                Route::post("/", "createOrUpdateAddress")->name("create");
+                Route::delete("/", "deleteAddress")->name("delete");
+                Route::post("select-address", "selectAddress")->name("select");
         });
     });
 });
@@ -64,6 +78,13 @@ Route::prefix("admin")->name("admin.")->group(function() {
                 Route::get("/","adminDashboardView")->name("index");
                 Route::post("logout","logout")->name("logout");
                 Route::get("/data-sampah","dataSampahView")->name("trash.index");
+                Route::get("/data-transaksi", "dataTransactionView")->name("transaction.index");
+            });
+
+            Route::prefix("data-transaksi")->controller(DataTransaction::class)
+            ->name("trans.")
+            ->group(function() {
+                Route::get("/datatable", "getDatatable")->name("datatable");
             });
             
             Route::prefix("data-sampah")->controller(DataTrashController::class)

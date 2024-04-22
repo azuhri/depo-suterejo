@@ -2,17 +2,32 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Services\AddressService;
 use App\Http\Services\FileManagementService;
+use App\Http\Services\JsonServices;
+use App\Http\Services\TransactionService;
+use App\Models\AssetTransaction;
+use App\Models\TransactionDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
     public FileManagementService $fileService;
+    public AddressService $addressService;
+    public JsonServices $json;
+    public TransactionService $transaction;
+
     public function  __construct(
-        FileManagementService $fileService
+        FileManagementService $fileService,
+        AddressService $addressService,
+        JsonServices $json,
+        TransactionService $transaction,
     ) {
         $this->fileService = $fileService;
+        $this->addressService = $addressService;
+        $this->json = $json;
+        $this->transaction = $transaction;
     }
 
     public function logout(Request $request)
@@ -62,11 +77,88 @@ class DashboardController extends Controller
             $totalMaxPrice += $trash->maxPrice;
             $totalMinPrice += $trash->minPrice;
         }
+
+        $defaultAddress = $this->addressService->getDefaultAddressUserByUserId(Auth::user()->id);
+        $allAddress = $this->addressService->getAllAddressUserById(Auth::user()->id);
+        $allAddress = $allAddress->sortByDesc("status");
+        $allAddress = $allAddress->values()->all();
         return view("app.landingpage.service-option-next", \compact(
             "sessionTrash",
             "sessionImages",
             "totalMaxPrice",
             "totalMinPrice",
+            "allAddress",
+            "defaultAddress"
         ));
+    }
+
+    public function paymentService(Request $request)
+    {
+        try {
+            $request->validate([
+                "address_id"  => ["required"],
+                "order_date"  => ["required"],
+                "range_time" => ["required"],
+                "bank_name" => ["required"],
+                "rekening_number" => ["required", "numeric"],
+                "rekening_name" => ["required"],
+            ], [
+                "address_id.required" => "Silahkan Anda buat alamat dahulu",
+                "order_date.required" => "Silahkan isi tanggal penjemputan",
+                "bank_name.required" => "Silahkan isi tipe Bank / E-Wallet pembayaran",
+                "rekening_number.required" => "Silahkan isi nomor rekening / no HP penerima pembayaran",
+                "rekening_name.required" => "Silahkan isi atas nama penerima pembayaran",
+            ]);
+
+            $trashes = \session("trashes");
+            $totalAmountMin = 0;
+            $totalAmountMax = 0;
+            $totalWeight = 0;
+            foreach ($trashes as $trash) {
+                $totalAmountMin += $trash->minPrice;
+                $totalAmountMax += $trash->maxPrice;
+                $totalWeight += $trash->weight;
+            }
+            $params = $request->toArray();
+            $params["user_id"] = Auth::user()->id;
+            $params["order_date"] = date("Y-m-d H:i:s", strtotime($request->order_date));
+            $params["estimate_amount_minimum"] = $totalAmountMin;
+            $params["estimate_amount_maximum"] = $totalAmountMax;
+            $params["amount"] = 0;
+            $params["weight_kg"] = $totalWeight;
+            $transaction = $this->transaction->newTransaction($params);
+            $listImages = \session("path_images");
+            $listAssets = [];
+            foreach ($listImages as $image) {
+                $assets["transaction_id"] = $transaction->id;
+                $assets["path_image"] = $image;
+                $listAssets[] = $assets;
+            }
+            $listItem = [];
+            foreach ($trashes as $trash) {
+                $trashData["trash_id"] = $trash->id;
+                $trashData["transaction_id"] = $transaction->id;
+                $trashData["weight_kg"] = $trash->weight;
+                $listItem[] = $trashData;
+            }
+            AssetTransaction::insert($listAssets);
+            TransactionDetail::insert($listItem);
+
+             session()->forget("trashes");
+             session()->forget("paht_images");
+            \session()->put("transaction", $transaction);
+            return $this->json->responseDataWithMessage($transaction, "Berhasil membuat transaksi");
+        } catch (\Throwable $th) {
+            return $this->json->responseError($th->getMessage());
+        }
+    }
+
+    public function transactionSuccedIndex() {
+        $transaction = session("transaction");
+        if(!$transaction) {
+            abort(404);
+        }
+
+        return view("app.landingpage.transaction-succed", compact("transaction"));
     }
 }

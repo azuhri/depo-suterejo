@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Services\TrashCategoryService;
 use App\Http\Services\TrashService;
 use App\Http\Services\UserService;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -29,6 +30,7 @@ class DashboardAdminController extends Controller
         return view("app.admin.dashboard", [
             "totalUsers" => count($this->userService->getAllUser()),
             "totalTrashCategories" => count($this->trashCategoryService->getAllTrashCategory()),
+            "totalTransaction" => Transaction::count(),
             "totalTrashes" => count($this->trashService->getAllTrash("id","DESC")),
         ]);
     }
@@ -38,6 +40,12 @@ class DashboardAdminController extends Controller
         return view("app.admin.data-sampah", [
             "trash_categories" => $this->trashCategoryService->getAllTrashCategory(),
             "total_data_sampah" => \count($this->trashService->getAllTrash("id", "DESC")),
+        ]);
+    }
+
+    public function dataTransactionView() {
+        return view("app.admin.data-transaksi", [
+            "total_transaction_today" => Transaction::where("order_date", \date("Y-m-d"))->count(),
         ]);
     }
 

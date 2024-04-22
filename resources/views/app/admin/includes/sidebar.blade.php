@@ -41,7 +41,7 @@
                   </li>
 
                   <li class="collapsed">
-                      <a class="m-link" data-bs-toggle="collapse" data-bs-target="#menu_dashboard" href="#">
+                      <a class="m-link {{url()->current() == route('admin.dashboard.transaction.index') ? "active" : ""  }}" href="{{route('admin.dashboard.transaction.index')}}">
                           <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="currentColor"
                               viewBox="0 0 16 16">
                               <path class="fill-secondary"

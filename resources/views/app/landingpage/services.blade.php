@@ -42,7 +42,7 @@
         </div>
     </div>
 
-    <div class="my-32 mb-40 py-32 flex bg-primary justify-center">
+    <div class="my-32 mb-40 py-32 px-32 flex bg-primary justify-center">
         <div class="w-3/4 flex flex-col-reverse md:flex-row justify-between items-center">
             <div class="my-4">
                 <p class="text-white text-center md:text-left text-5xl font-extrabold text-primary">
@@ -57,7 +57,7 @@
                 </a>
             </div>
             <div>
-                <img class="w-[500px]" src="{{ asset('images/ilustrasi-service2.png') }}" alt="">
+                <img class="w-[350px]" src="{{ asset('images/ilustrasi-service2.png') }}" alt="">
             </div>
         </div>
     </div>

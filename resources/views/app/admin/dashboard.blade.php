@@ -53,7 +53,7 @@
                             <img class="w-50" src="{{ asset('images/illustrations/transactions.png') }}"
                                 alt="illustration">
                             <div class="mt-1 text-center">
-                                <span class="fw-bold h4 mb-0 counter">0</span>
+                                <span class="fw-bold h4 mb-0 counter">{{$totalTransaction}}</span>
                                 <span class="text-success ms-1">Data</span>
                             </div>
                         </div>

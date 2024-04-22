@@ -1,7 +1,8 @@
 <footer class="bg-primary py-20 p-4 lg:px-[250px] text-white flex flex-col justify-center items-center">
     <div class="flex justify-center items-center">
         <div class="lg:block hidden mr-[150px]">
-            <img class="w-[150px]" src="{{ asset('images/recycle.png') }}" alt="">
+            {{-- <img class="w-[150px]" src="{{ asset('images/recycle.png') }}" alt=""> --}}
+            <img class="w-50" src="{{asset("images/recycle2.png")}}" alt="">
         </div>
         <div class="">
             <div class="flex">

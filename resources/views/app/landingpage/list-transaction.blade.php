@@ -1,7 +1,7 @@
 @extends('app.template.master_landingpage')
 
 @section('title')
-    Beranda
+    Tentang Kami
 @endsection
 
 @section('hero')
@@ -9,85 +9,58 @@
 
 @section('content')
     {{-- Hero --}}
-    {{-- <div class="w-full bg-cover bg-center h-screen relative flex justify-center">
-        <img class="w-full max-h-[92vh] min-h-full absolute z-0" src="{{ asset('images/bg-home3.png') }}" alt="">
-        <div class="relative z-1 flex flex-col items-center">
-            <p class="text-5xl text-white font-medium mt-32 mb-5 text-center">
-                Selamatkan Lingkunganmu!
-            </p>
-            <p class="text-lg w-3/4 text-white text-center">
-                Setiap sampah yang kamu jual ke kami, akan didaur ulang menjadi produk tebarukan lho.
-                Jangan ragu-ragu untuk menyelamatkan lingkungan bersama Solusisampah!
-            </p>
-        </div>
-    </div> --}}
-
-    <div class="hero min-h-screen" style="background-image: url({{ asset('images/bg-home3.png') }});">
-        <div class="hero-overlay bg-opacity-30"></div>
-        <div class="hero-content text-center text-neutral-content">
-            <div class="z-1 flex mb-[560px] flex-col items-center h-full justify-start">
-                <p class="text-5xl text-white font-bold mt-32 mb-5 text-center">
-                    Selamatkan Lingkunganmu!
-                </p>
-                <p class="text-lg w-3/4 text-white text-center">
-                    Setiap sampah yang kamu jual ke kami, akan didaur ulang menjadi produk tebarukan lho.
-                    Jangan ragu-ragu untuk menyelamatkan lingkungan bersama Solusisampah!
-                </p>
-            </div>
-            {{-- <div class="max-w-lg">
-               
-            </div> --}}
+    <div class="w-full bg-cover bg-center h-screen relative flex justify-center">
+        <img class="w-full h-[92vh] absolute z-0" src="{{ asset('images/hero-aboutus.png') }}" alt="">
+        <div class="absolute h-[92vh] w-full bg-gray-900 z-0 opacity-50"></div>
+        <div class="relative w-full h-[92vh] flex flex-col justify-center px-10 z-5">
+            <p class="font-medium text-white text-6xl my-6">Solusisampah</p>
+            <p class="font-light text-white text-xl w-1/4">Kelola sampah daur ulangmu dimulai dari lingkup terkecil untuk menciptakan dampak yang luas. Yuk kita mullai hari ini!</p>
         </div>
     </div>
-    {{-- <div class="mb-20 mb-30 px-32">
-        <p class="text-4xl text-center font-bold text-primary">TENTANG KAMI</p>
+    <div class="my-32 mb-40 px-32">
+        <p class="text-4xl my-10 text-center font-bold text-primary">SOLUSISAMPAH</p>
         <p class="my-4 text-xl px-32 text-justify font-light">
-            Super Depo Sutorejo merupakan depo pengolahan sampah modern yang ada di Surabaya. Dikatakan modern karena depo
-            ini didukung dengan sarana dan prasarana yang canggih, ramah lingkungan, dan mudah dioperasikan. Sarana dan
-            prasarana yang ada di Super Depo Sutorejo adalah gerobak sampah, garputala, sapu,timbangan, konveyor, alat
-            pencacah sampah, alat pencucian plastik, dan alat penekan (press) plastik. Dilihat dari segi kuantitas,
-            ketersediaan sarana dan prasarana padaSuper Depo Sutorejo untuk mendukung aktivitas pemilahan sampah sudah
-            terpenuhi.
+            Solusisampah merupakan website penjualan dan pengelolaan sampah di Super Depo Sutorejo yang merupakan bagian program kerjasama lingkungan antara Pemerintahan kota Surabaya dengan Kitakyushu Jepang dengan menggunakan teknologi limbah organik dan anorganik secara modern. Dengan metode tersebut, proses pemilahan sampah bisa dilakukan dengan lebih efektif, efisien, dan higienis yang mampu mengolah hingga 12–15 ton sampah per harinya.
         </p>
-    </div> --}}
-    <div class="my-32 mb-40 flex justify-center">
-        <div class="w-4/5 flex flex-col-reverse md:flex-row">
-            <div class="flex flex-col justify-center my-4 md:px-20">
-                <p class="text-2xl  font-bold text-primary text-justify">
-                    Misi Kami Menyediakan Akses Penjemputan Sampah Secara Digital Untuk Masa Depan yang Lebih Bersih
-                </p>
-                <p class="text-md font-light text-gray my-4 text-justify">
-                    Cukup pilih sampahmu, lalu pilih lokasi penjemputan, picker kami akan darang ke rumahmu untuk mengambil
-                    sampah. Dengan menggunakan Solusisampah, kamu sudah membantu menanggulangi permasalahan sampah di
-                    lingkunganmu.
+        <p class="my-6 text-xl px-32 text-justify font-light">
+            Solusisampah memberikan solusi layanan jemput sampah sehingga masyarakat menyadari bahwa dengan memilah sampah, mereka bisa mendapatkan nilai lebih dari sampah tersebut, dan membuat biaya pengelolaan sampah menjadi minimal.
+        </p>
+    </div>
+    <div class="my-32 mb-40 flex justify-center py-32 bg-primary">
+        <div class="w-11/12 flex">
+            <div class="flex flex-col justify-center px-40">
+                <p class="text-xl font-normal text-white text-justify">
+                    Yuk, kita lakukan perubahan untuk masa depan dan lingkungan yang lebih bersih. Bersama Solusisampah, kami mengajak kamu untuk melakukan perubahan dengan cara yang sederhana; memilah sampah daur ulangmu lalu pesan penjemputan sampah daur ulangmu melalui website Solusisampah, dan dapatkan penukaran uang sehingga dapat mengurangi timbunan sampah.                </p>
+                <p class="text-md font-normal text-white my-4 text-justify">
+                    Selain berkontribusi untuk bumi dan alam yang lebih baik, melalui Solusisampah, kamu juga berkesempatan meningkatkan kesejahteraan sosial dan ekonomi bagi seluruh lapisan masyarakat.
                 </p>
             </div>
             <div>
-                <img class="rounded-3xl w-[1500px]" src="{{ asset('images/home-img1.png') }}" alt="">
+                <img class="rounded-top-right-xl w-[3000px]" src="{{ asset('images/ilustrasi-aboutus.png') }}" alt="">
             </div>
         </div>
     </div>
-    <div class="my-20 mb-30 py-32 bg-primary">
+    {{-- <div class="my-20 mb-30 py-32 bg-primary">
         <p class="text-4xl text-center font-bold text-white">LAYANAN</p>
-        <div class="flex justify-center items-center flex-col-reverse md:flex-row">
-            <div class="flex flex-col justify-center w-3/4 md:w-1/2 md:w-1/6 mt-10 mx-20">
+        <div class="flex justify-center">
+            <div class="flex flex-col justify-center w-1/6 mt-10 mx-20">
                 <img class="rounded-3xl" src="{{ asset('images/service-1.png') }}" alt="">
                 <p class="text-center mt-4 text-white text-2xl font-normal">Jemput Sampah</p>
             </div>
-            <div class="flex flex-col justify-center w-3/4 md:w-1/2 md:w-1/6 mt-10 mx-20">
+            <div class="flex flex-col justify-center w-1/6 mt-10 mx-20">
                 <img class="rounded-3xl" src="{{ asset('images/service-3.png') }}" alt="">
                 <p class="text-center mt-4 text-white text-2xl font-normal">Kerjasama Mitra</p>
             </div>
-            <div class="flex flex-col justify-center w-3/4 md:w-1/2 md:w-1/6 mt-10 mx-20">
+            <div class="flex flex-col justify-center w-1/6 mt-10 mx-20">
                 <img class="rounded-3xl" src="{{ asset('images/service-2.png') }}" alt="">
                 <p class="text-center mt-4 text-white text-2xl font-normal">Servis Kebersihan</p>
             </div>
         </div>
-    </div>
+    </div> --}}
     <div class="my-20">
         <p class="text-4xl text-center font-bold text-primary">BLOG</p>
-        <div class="flex md:flex-row flex-col items-center justify-center mt-10">
-            <div class="p-1 my-4 w-3/4 md:w-1/4 rounded-3xl shadow-xl border border-2 mx-2">
+        <div class="flex justify-center mt-10">
+            <div class="p-1 my-4 w-1/4 rounded-3xl shadow-xl border border-2 mx-2">
                 <img class="rounded-3xl p-1 w-full" src="{{ asset('images/blog-1.png') }}" alt="">
                 <div class="my-1 p-4">
                     <p class="font-bold">
@@ -106,7 +79,7 @@
                         Selengkapnya</a>
                 </div>
             </div>
-            <div class="p-1 my-4 w-3/4 md:w-1/4 rounded-3xl shadow-xl border border-2 mx-2">
+            <div class="p-1 my-4 w-1/4 rounded-3xl shadow-xl border border-2 mx-2">
                 <img class="rounded-3xl p-1 w-full" src="{{ asset('images/blog-2.png') }}" alt="">
                 <div class="my-1 p-4">
                     <p class="font-bold">
@@ -125,7 +98,7 @@
                         Selengkapnya</a>
                 </div>
             </div>
-            <div class="p-1 my-4 w-3/4 md:w-1/4 rounded-3xl shadow-xl border border-2 mx-2">
+            <div class="p-1 my-4 w-1/4 rounded-3xl shadow-xl border border-2 mx-2">
                 <img class="rounded-3xl p-1 w-full" src="{{ asset('images/blog-1.png') }}" alt="">
                 <div class="my-1 p-4">
                     <p class="font-bold">
