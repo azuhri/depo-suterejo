@@ -9,26 +9,27 @@
 
 @section('content')
     {{-- Hero --}}
-    <div class="w-full bg-cover bg-center h-screen relative flex justify-center">
-        <img class="w-full h-[92vh] absolute z-0" src="{{ asset('images/hero-aboutus.png') }}" alt="">
-        <div class="absolute h-[92vh] w-full bg-gray-900 z-0 opacity-50"></div>
-        <div class="relative w-full h-[92vh] flex flex-col justify-center px-10 z-5">
+    <div class="hero min-h-screen" style="background-image: url({{ asset('images/hero-aboutus.png') }});">
+        <div class="hero-overlay bg-opacity-60"></div>
+        <div class="hero-content text-center text-neutral-content">
+          <div class="max-w-md md:absolute sticky  left-10 ">
             <p class="font-medium text-white text-6xl my-6">Solusisampah</p>
-            <p class="font-light text-white text-xl w-1/4">Kelola sampah daur ulangmu dimulai dari lingkup terkecil untuk menciptakan dampak yang luas. Yuk kita mullai hari ini!</p>
+            <p class="font-light text-white text-xl">Kelola sampah daur ulangmu dimulai dari lingkup terkecil untuk menciptakan dampak yang luas. Yuk kita mullai hari ini!</p>
+          </div>
         </div>
-    </div>
-    <div class="my-32 mb-40 px-32">
+      </div>
+    <div class="my-32 mb-40 px-10 md:px-32">
         <p class="text-4xl my-10 text-center font-bold text-primary">SOLUSISAMPAH</p>
-        <p class="my-4 text-xl px-32 text-justify font-light">
+        <p class="my-4 text-xl px-4 md:px-32 text-justify font-light">
             Solusisampah merupakan website penjualan dan pengelolaan sampah di Super Depo Sutorejo yang merupakan bagian program kerjasama lingkungan antara Pemerintahan kota Surabaya dengan Kitakyushu Jepang dengan menggunakan teknologi limbah organik dan anorganik secara modern. Dengan metode tersebut, proses pemilahan sampah bisa dilakukan dengan lebih efektif, efisien, dan higienis yang mampu mengolah hingga 12–15 ton sampah per harinya.
         </p>
-        <p class="my-6 text-xl px-32 text-justify font-light">
+        <p class="my-6 text-xl px-4 md:px-32 text-justify font-light">
             Solusisampah memberikan solusi layanan jemput sampah sehingga masyarakat menyadari bahwa dengan memilah sampah, mereka bisa mendapatkan nilai lebih dari sampah tersebut, dan membuat biaya pengelolaan sampah menjadi minimal.
         </p>
     </div>
     <div class="my-32 mb-40 flex justify-center py-32 bg-primary">
-        <div class="w-11/12 flex">
-            <div class="flex flex-col justify-center px-40">
+        <div class="w-11/12 flex flex-col-reverse md:flex-row">
+            <div class="flex flex-col justify-center px-2 mt-10 md:mt-0 md:px-40">
                 <p class="text-xl font-normal text-white text-justify">
                     Yuk, kita lakukan perubahan untuk masa depan dan lingkungan yang lebih bersih. Bersama Solusisampah, kami mengajak kamu untuk melakukan perubahan dengan cara yang sederhana; memilah sampah daur ulangmu lalu pesan penjemputan sampah daur ulangmu melalui website Solusisampah, dan dapatkan penukaran uang sehingga dapat mengurangi timbunan sampah.                </p>
                 <p class="text-md font-normal text-white my-4 text-justify">
@@ -59,8 +60,8 @@
     </div> --}}
     <div class="my-20">
         <p class="text-4xl text-center font-bold text-primary">BLOG</p>
-        <div class="flex justify-center mt-10">
-            <div class="p-1 my-4 w-1/4 rounded-3xl shadow-xl border border-2 mx-2">
+        <div class="flex md:flex-row flex-col items-center justify-center mt-10">
+            <div class="p-1 my-4 w-3/4 md:w-1/4 rounded-3xl shadow-xl border border-2 mx-2">
                 <img class="rounded-3xl p-1 w-full" src="{{ asset('images/blog-1.png') }}" alt="">
                 <div class="my-1 p-4">
                     <p class="font-bold">
@@ -79,7 +80,7 @@
                         Selengkapnya</a>
                 </div>
             </div>
-            <div class="p-1 my-4 w-1/4 rounded-3xl shadow-xl border border-2 mx-2">
+            <div class="p-1 my-4 w-3/4 md:w-1/4 rounded-3xl shadow-xl border border-2 mx-2">
                 <img class="rounded-3xl p-1 w-full" src="{{ asset('images/blog-2.png') }}" alt="">
                 <div class="my-1 p-4">
                     <p class="font-bold">
@@ -98,7 +99,7 @@
                         Selengkapnya</a>
                 </div>
             </div>
-            <div class="p-1 my-4 w-1/4 rounded-3xl shadow-xl border border-2 mx-2">
+            <div class="p-1 my-4 w-3/4 md:w-1/4 rounded-3xl shadow-xl border border-2 mx-2">
                 <img class="rounded-3xl p-1 w-full" src="{{ asset('images/blog-1.png') }}" alt="">
                 <div class="my-1 p-4">
                     <p class="font-bold">

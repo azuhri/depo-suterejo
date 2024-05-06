@@ -14,8 +14,8 @@
 
 @section('content')
     <div class="my-10 flex justify-center">
-        <div class="w-full flex justify-center">
-            <div class="w-2/4">
+        <div class="w-full flex-col md:flex-row px-4 md:px-10 md:flex justify-center">
+            <div class="w-full md:w-3/4">
                 <div class="my-4 bg-slate-100 mx-1 border rounded-lg">
                     <p class="text-xl font-bold border-b-2 border-b-gray-200 pb-3 p-3 text-primary">INFORMASI ALAMAT
                         PENJEMPUTAN</p>
@@ -90,7 +90,7 @@
                     </div>
                 </div>
             </div>
-            <div class="w-1/3 my-4">
+            <div class="w-full md:w-1/3 my-4">
                 <div class="w-full  bg-slate-100 mx-1 border rounded-lg">
                     <p class="text-xl w-full mb-2 font-bold border-b-2 border-b-gray-200 pb-3 p-3 text-primary">INFORMASI
                         PENJUALAN</p>

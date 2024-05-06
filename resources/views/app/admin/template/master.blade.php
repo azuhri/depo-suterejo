@@ -51,7 +51,7 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-        
+
         const openModal = (id) => {
             $("#" + id).modal("show");
         }

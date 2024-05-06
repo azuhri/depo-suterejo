@@ -9,7 +9,7 @@
 
 @section('content')
     {{-- Hero --}}
-    <div class="w-full bg-cover bg-center h-screen relative flex justify-center">
+    {{-- <div class="w-full bg-cover bg-center h-screen relative flex justify-center">
         <img class="w-full h-[92vh] absolute z-0" src="{{ asset('images/hero-services.png') }}" alt="">
         <div class="absolute h-[92vh] w-full bg-gray-900 z-0 opacity-50"></div>
         <div class="relative w-full h-[92vh] flex items-center justify-center px-10 z-5">
@@ -19,7 +19,19 @@
                 sampah pada tahun mendatang.
             </p>
         </div>
-    </div>
+    </div> --}}
+    <div class="hero min-h-screen" style="background-image: url({{ asset('images/hero-services.png') }});">
+        <div class="hero-overlay bg-opacity-60"></div>
+        <div class="hero-content text-center text-neutral-content">
+          <div class="max-w-5xl">
+            <p class="font-thin text-white text-center  md:px-32 text-2xl">
+                Solusisampah memberikan cara baru yang lebih efektif dan efisien untuk penjualan dan pengelolaan sampah.
+                Dengan adanya layanan kami akan berdampak positif bagi masyarakat dan juga lingkungan yang bebas polusi
+                sampah pada tahun mendatang.
+            </p>
+          </div>
+        </div>
+      </div>
     <div class="my-32 mb-40 px-12 md:px-32 flex justify-center">
         <div class="w-full md:w-3/4 flex justify-between flex-col-reverse md:flex-row items-center">
             <div class="my-4">
@@ -31,7 +43,7 @@
                     membayar sampahmu.
                 </p>
                 <a href="{{route('account.services.option')}}"
-                    class="text-primary text-md border-2 w-full text-center md:text-left flex md:block md:w-[400px] font-medium border-primary rounded-full p-3 justify-center md:px-10 mt-12">
+                    class="text-primary text-md border-2 w-full text-center flex md:block md:w-[400px] font-medium border-primary rounded-full p-3 justify-center md:px-10 mt-12">
                     Klik disini untuk melakukan transaksi
                 </a>
             </div>
@@ -42,7 +54,7 @@
         </div>
     </div>
 
-    <div class="my-32 mb-40 py-32 px-32 flex bg-primary justify-center">
+    <div class="my-32 mb-40 py-32 px-4 md:px-32 flex bg-primary justify-center">
         <div class="w-3/4 flex flex-col-reverse md:flex-row justify-between items-center">
             <div class="my-4">
                 <p class="text-white text-center md:text-left text-5xl font-extrabold text-primary">
