@@ -52,7 +52,7 @@
                         <a href="#">Profil</a>
                     </li>
                     <li class="text-primary font-bold">
-                        <a href="#">Riwayat Transaksi</a>
+                        <a href="{{route('account.transaction.list.index')}}">Riwayat Transaksi</a>
                     </li>
                     <li class="text-primary font-bold flex">
                         <form class="w-full flex" action="{{ route('account.logout') }}" method="POST">
@@ -92,6 +92,37 @@
     <div class="drawer-side">
         <label for="my-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
         <ul class="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
+            @if (Auth::user())
+                <div class="collapse w-full">
+                    <input type="checkbox" />
+                    <div class="collapse-title text-xl font-medium w-full">
+                        <div tabindex="0" role="button"
+                            class="font-semibold flex text-sm m-1 items-center">
+                            <img class="w-[40px] shadow rounded-full"
+                                src="https://ui-avatars.com/api/?name={{ Auth::user()->email }}&background=FFFFFF&secondary=1F448B"
+                                alt="">
+                            <span class="mx-2 text-center">{{ Auth::user()->name }}</span>
+                        </div>
+                    </div>
+                    <div class="collapse-content">
+                        <ul tabindex="0"
+                            class="p-2 border shadow rounded-box">
+                            <li class="text-primary font-bold">
+                                <a href="#">Profil</a>
+                            </li>
+                            <li class="text-primary font-bold">
+                                <a href="{{route('account.transaction.list.index')}}">Riwayat Transaksi</a>
+                            </li>
+                            <li class="text-primary font-bold flex">
+                                <form class="w-full flex" action="{{ route('account.logout') }}" method="POST">
+                                    @csrf
+                                    <button class="w-full text-left" type="submit">Keluar</button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            @endif
             <!-- Sidebar content here -->
             <li class="{{ url()->current() == route('landing.home') ? 'font-bold' : '' }}">
                 <a href="{{ route('landing.home') }}">Beranda</a>
@@ -105,12 +136,15 @@
             <li class="{{ url()->current() == route('landing.blog') ? 'font-bold' : '' }}">
                 <a href="#">Blog</a>
             </li>
-            <li class="{{ url()->current() == route('auth.login') ? 'font-bold' : '' }}">
-                <a href="{{ route('auth.login') }}">Masuk</a>
-            </li>
-            <li class="{{ url()->current() == route('auth.register') ? 'font-bold' : '' }}">
-                <a href="{{ route('auth.register') }}">Daftar</a>
-            </li>
+
+            @if (!Auth::user())
+                <li class="{{ url()->current() == route('auth.login') ? 'font-bold' : '' }}">
+                    <a href="{{ route('auth.login') }}">Masuk</a>
+                </li>
+                <li class="{{ url()->current() == route('auth.register') ? 'font-bold' : '' }}">
+                    <a href="{{ route('auth.register') }}">Daftar</a>
+                </li>
+            @endif
         </ul>
     </div>
 </div>

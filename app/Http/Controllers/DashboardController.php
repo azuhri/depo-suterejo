@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Repositories\TransactionRepository;
 use App\Http\Services\AddressService;
 use App\Http\Services\FileManagementService;
 use App\Http\Services\JsonServices;
@@ -17,17 +18,20 @@ class DashboardController extends Controller
     public AddressService $addressService;
     public JsonServices $json;
     public TransactionService $transaction;
+    public TransactionRepository $transactionRepo;
 
     public function  __construct(
         FileManagementService $fileService,
         AddressService $addressService,
         JsonServices $json,
         TransactionService $transaction,
+        TransactionRepository $transactionRepo,
     ) {
         $this->fileService = $fileService;
         $this->addressService = $addressService;
         $this->json = $json;
         $this->transaction = $transaction;
+        $this->transactionRepo = $transactionRepo;
     }
 
     public function logout(Request $request)
@@ -160,5 +164,35 @@ class DashboardController extends Controller
         }
 
         return view("app.landingpage.transaction-succed", compact("transaction"));
+    }
+
+    public function transactionListIndex() {
+        return \view("app.landingpage.list-transaction.index", [
+            "all_transactions" => $this->transactionRepo->getDataTransaction([
+                "user_id" => Auth::user()->id,
+            ]),
+            "finished_transactions" => $this->transactionRepo->getDataTransaction([
+                "user_id" => Auth::user()->id,
+                "status_transaction" => "FINISHED",
+            ]),
+        ]);
+    }
+
+    public function getDataListTransaction(Request $request) {
+        $datas = $this->transactionRepo->getDataTransaction([
+            "relations" => ["detail", "detail.trash", "assets", "address"],
+            "user_id" => Auth::user()->id,
+            ...$request->toArray(),
+        ]);
+
+        if(count($datas)) {
+            $responseHtml = view("app.landingpage.list-transaction.partials.list", [
+                "datas" => $datas,
+            ])->render();
+        } else {
+            $responseHtml = "<div class='flex justify-center text-xs bg-base-300 font-light p-4 rounded-xl'>Tidak ada data transaksi</div>";
+        }
+
+        return \response()->json(["data" => $responseHtml]);
     }
 }

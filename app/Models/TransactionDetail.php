@@ -15,4 +15,8 @@ class TransactionDetail extends Model
         "created_at",
         "updated_at",
     ];
+
+    public function trash() {
+        return $this->belongsTo(Trash::class, "trash_id");
+    }
 }
