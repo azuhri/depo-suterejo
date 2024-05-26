@@ -7,6 +7,7 @@ use App\Http\Services\AddressService;
 use App\Http\Services\FileManagementService;
 use App\Http\Services\JsonServices;
 use App\Http\Services\TransactionService;
+use App\Http\Services\UserService;
 use App\Models\AssetTransaction;
 use App\Models\TransactionDetail;
 use Illuminate\Http\Request;
@@ -19,6 +20,7 @@ class DashboardController extends Controller
     public JsonServices $json;
     public TransactionService $transaction;
     public TransactionRepository $transactionRepo;
+    public UserService $userService;
 
     public function  __construct(
         FileManagementService $fileService,
@@ -26,12 +28,14 @@ class DashboardController extends Controller
         JsonServices $json,
         TransactionService $transaction,
         TransactionRepository $transactionRepo,
+        UserService $userService,
     ) {
         $this->fileService = $fileService;
         $this->addressService = $addressService;
         $this->json = $json;
         $this->transaction = $transaction;
         $this->transactionRepo = $transactionRepo;
+        $this->userService = $userService;
     }
 
     public function logout(Request $request)
@@ -194,5 +198,40 @@ class DashboardController extends Controller
         }
 
         return \response()->json(["data" => $responseHtml]);
+    }
+
+    public function updateProfile(Request $request) {
+        try {
+            $request->validate([
+                "email" => ["required", "email"],
+                "name" => ["required"],
+                "phonenumber" => ["required"],
+            ]);
+
+            $this->userService->updateDataUser($request, Auth::user()->id);
+            return \redirect()->back()->with("success", "Berhasil menyimpan data profil akun Anda");
+        } catch (\Throwable $th) {
+            return \redirect()->back()->with("error", $th->getMessage());
+        }
+    }
+
+    public function changePassword(Request $request){
+        try {
+            $request->validate([
+                "old_password" => ["required"],
+                "new_password" => ["required", "min:6"],
+                "confirm_new_password" => ["required"],
+            ], [
+                "old_password.required" => "Maaf password lama Anda harus diisi!",
+                "new_password.required" => "Maaf password baru lama Anda harus diisi!",
+                "confirm_new_password.required" => "Maaf konfirmasi password baru lama Anda harus diisi!",
+                "old_password.min" => "Maaf password baru Anda harus minimal 6 digit!",
+            ]);
+
+            $this->userService->changePassword($request, Auth::user()->id);
+            return \redirect()->back()->with("success", "Berhasil mengubah password akun Anda");
+        } catch (\Throwable $th) {
+            return \redirect()->back()->with("error", $th->getMessage());
+        }
     }
 }

@@ -49,7 +49,7 @@
                 </div>
                 <ul tabindex="0" class="dropdown-content z-[1] menu p-2 border shadow bg-base-100 rounded-box w-52">
                     <li class="text-primary font-bold">
-                        <a href="#">Profil</a>
+                        <a href="{{route("account.profile")}}">Profil</a>
                     </li>
                     <li class="text-primary font-bold">
                         <a href="{{route('account.transaction.list.index')}}">Riwayat Transaksi</a>
@@ -108,7 +108,7 @@
                         <ul tabindex="0"
                             class="p-2 border shadow rounded-box">
                             <li class="text-primary font-bold">
-                                <a href="#">Profil</a>
+                                <a href="{{route("account.profile")}}">Profil</a>
                             </li>
                             <li class="text-primary font-bold">
                                 <a href="{{route('account.transaction.list.index')}}">Riwayat Transaksi</a>

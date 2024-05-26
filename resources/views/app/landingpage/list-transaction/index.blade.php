@@ -55,16 +55,16 @@
                 <div class="status flex gap-2 px-1 md:px-4 my-2">
                     <div class="flex items-center">
                         <p class="ml-1 mr-2 text-sm">Status</p>
-                        <div class="flex flex-wrap gap-2">
-                            <button
-                                class="text-[12px] md:text-md border border-blue-500 font-bold bg-blue-50 rounded-xl text-blue-500 p-2 px-4 text-sm">Semua</button>
-                            <button
+                        <div class="flex flex-wrap gap-2" id="changeStatusContainer">
+                            <button onclick="changeStatusOrder(this, '*')"
+                                class="text-[12px] md:text-md border font-bold border-blue-500 bg-blue-50 rounded-xl text-blue-500 p-2 px-4 text-sm">Semua</button>
+                            <button onclick="changeStatusOrder(this, 'PENDING')"
                                 class="text-[12px] md:text-md border border-gray-500 bg-gray-50 rounded-xl text-gray-500 p-2 px-4 text-sm">Diproses</button>
-                            <button
+                            <button onclick="changeStatusOrder(this, 'PICKUP')"
                                 class="text-[12px] md:text-md border border-gray-500 bg-gray-50 rounded-xl text-gray-500 p-2 px-4 text-sm">Dijemput</button>
-                            <button
+                            <button onclick="changeStatusOrder(this, 'FINISHED')"
                                 class="text-[12px] md:text-md border border-gray-500 bg-gray-50 rounded-xl text-gray-500 p-2 px-4 text-sm">Selesai</button>
-                            <button
+                            <button onclick="changeStatusOrder(this, 'PAID')"
                                 class="text-[12px] md:text-md border border-gray-500 bg-gray-50 rounded-xl text-gray-500 p-2 px-4 text-sm">Dibayar</button>
                         </div>
                     </div>
@@ -88,6 +88,8 @@
         $('.datepicker').datepicker({
             format: 'dd mmmm yyyy', // Change the format here
         });
+
+        let date, orderNumber, statusTransaction;
 
         const getDatatable = async (query) => {
             let loading = `<div class="flex flex-col">
@@ -115,24 +117,31 @@
                     .catch(error => {
                         console.error("Fetch error:", error);
                     });
-            }, 2000);
+            }, 1000);
         }
 
         getDatatable();
 
         const changeOrderDate = (self) => {
-            let date = $(self).val();
-            getDatatable(`order_date=${date}`);
+            date = $(self).val();
+            getDatatable(`order_date=${date ?? ''}&order_number=${orderNumber ?? ''}&status=${statusTransaction}`);
         }
 
         const searchOrderNumber = (self) => {
-            let orderNumber = $(self).val();
-            alert(orderNumber);
-            getDatatable(`order_number=${orderNumber}`);
+            orderNumber = $(self).val();
+            getDatatable(`order_date=${date ?? ''}&order_number=${orderNumber ?? ''}&status=${statusTransaction}`);
         }
 
-        const changeStatusOrder = (val) => {
+        const changeStatusOrder = (self, val) => {
+            statusTransaction = val;
+            $("#changeStatusContainer .border-blue-500")
+                .removeClass("border-blue-500 bg-blue-50 font-bold text-blue-500")
+                .addClass("border-gray-500 bg-gray-50 text-gray-500");
 
+            $(self).removeClass("border-gray-500 bg-gray-50 text-gray-500")
+                .addClass("border-blue-500 bg-blue-50 font-bold text-blue-500");
+
+            getDatatable(`order_date=${date ?? ''}&order_number=${orderNumber ?? ''}&status_transaction=${statusTransaction}`);
         }
     </script>
 @endsection

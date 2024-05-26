@@ -49,6 +49,9 @@ Route::group(["middleware" => "auth"], function () {
     Route::prefix("account")->name("account.")->group(function () {
         Route::get("services/option", [LandingPageController::class, "servicesOptionIndex"])->name("services.option");
         Route::controller(DashboardController::class)->group(function () {
+            Route::view("profile","app.landingpage.profile")->name("profile");
+            Route::post("profile", "updateProfile")->name("profile.update");
+            Route::post("change-password", "changePassword")->name("change-password");
             Route::post("services", "submitDataRequestService")->name("services.post");
             Route::get("services/next-step", "serviceNextStepIndex")->name("services.next.index");
             Route::post("services/next-step", "paymentService")->name("services.next.submit");

@@ -49,7 +49,11 @@ class TransactionRepository
         }
 
         if(\array_key_exists("status_transaction", $filters) && $filters["status_transaction"] != "*") {
-            $query->where("status_transaction", $filters["status_transaction"]);
+            if($filters["status_transaction"] == "PAID") {
+                $query->where("is_paid", 1);
+            } else {
+                $query->where("status_transaction", $filters["status_transaction"]);
+            }
         }
 
         if(\array_key_exists("order_by", $filters) && \array_key_exists("sort_by", $filters)) {

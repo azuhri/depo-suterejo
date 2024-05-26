@@ -3,6 +3,12 @@
         $badge = '';
         if ($data->status_transaction == 'PENDING') {
             $badge = '<div class="badge text-xs badge-primary">diproses</div>';
+        } else if($data->status_transaction == 'PICKUP') {
+            $badge = '<div class="badge text-xs badge-neutral">dijemput</div>';
+        } else if($data->status_transaction == 'FINISHED' && $data->is_paid) {
+            $badge = '<div class="badge text-xs badge-success text-white">dibayar</div>';
+        } else {
+            $badge = '<div class="badge text-xs badge-ghost">selesai</div>';
         }
     @endphp
     <div class="card card-compact w-full bg-base-100 shadow-xl border border-gray-300 shadow mb-3">
@@ -54,6 +60,11 @@
                     </div>
                     <div class="divider lg:divider-horizontal"></div>
                     <div class="grid flex-grow h-32 rounded-box place-items-center">
+                        <div class="text-center flex flex-col items-center">
+                            <p class="text-xs font-semibold">Estimasi Total Berat</p>
+                            <p class="bg-base-300 text-xs rounded my-1 px-3 p-1 rounded">
+                                {{$data->weight_kg}}kg
+                        </div>
                         <div class="text-center flex flex-col items-center">
                             <p class="text-xs font-semibold">Estimasi Minimum Harga</p>
                             <p class="bg-base-300 text-xs rounded my-1 px-3 p-1 rounded">

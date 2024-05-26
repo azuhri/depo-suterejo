@@ -34,6 +34,17 @@
                callback: undefined
            })
        @endif
+       @if (session('error'))
+           vt.error("{{ session('error') }}", {
+               title: "Notifikasi",
+               position: "bottom-right",
+               // position: toastPosition.TopCenter,
+               duration: 4000,
+               closable: false,
+               focusable: false,
+               callback: undefined
+           })
+       @endif
    </script>
    @yield('js')
 </body>
