@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\DashboardAdminController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DataTransaction;
@@ -105,6 +106,12 @@ Route::prefix("admin")->name("admin.")->group(function () {
                     Route::delete("sub-sampah", "deleteTrash")->name("delete-sub-trash");
                     Route::get("sub-sampah", "getAllDataTrash")->name("get-sub-trash");
                     Route::put("sub-sampah", "updateSubTrash")->name("update-sub-trash");
+                });
+            Route::prefix("blogs")->controller(BlogController::class)
+                ->name("blog.")
+                ->group(function() {
+                    Route::get("/", "blogPage")->name("index");
+                    Route::get("create", "blogCreatePage")->name("create");
                 });
         });
     });

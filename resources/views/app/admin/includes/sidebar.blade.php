@@ -56,7 +56,7 @@
                   </li>
 
                   <li class="collapsed">
-                    <a class="m-link" data-bs-toggle="collapse" data-bs-target="#menu_dashboard" href="#">
+                    <a class="m-link {{url()->current() == route('admin.dashboard.blog.index') ? "active" : ""  }}" href="{{route('admin.dashboard.blog.index')}}">
                         <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
                         <span class="ms-2">Blog Artikel</span>
                     </a>
