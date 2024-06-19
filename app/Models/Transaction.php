@@ -43,4 +43,8 @@ class Transaction extends Model
     public function user() {
         return $this->belongsTo(User::class, "user_id");
     }
+
+    public function isFinishedScales() {
+        return TransactionDetail::where("transaction_id", $this->id)->where("final_weight_kg", "=", 0)->count() == 0 ? true : \false;
+    }
 }

@@ -3,9 +3,9 @@
         $badge = '';
         if ($data->status_transaction == 'PENDING') {
             $badge = '<div class="badge text-xs badge-primary">diproses</div>';
-        } else if($data->status_transaction == 'PICKUP') {
+        } elseif ($data->status_transaction == 'PICKUP') {
             $badge = '<div class="badge text-xs badge-neutral">dijemput</div>';
-        } else if($data->status_transaction == 'FINISHED' && $data->is_paid) {
+        } elseif ($data->status_transaction == 'FINISHED' && $data->is_paid) {
             $badge = '<div class="badge text-xs badge-success text-white">dibayar</div>';
         } else {
             $badge = '<div class="badge text-xs badge-ghost">selesai</div>';
@@ -17,8 +17,10 @@
                 <span class="text-xs font-semibold">{{ date('d F Y H:i', strtotime($data->created_at)) }} </span>
                 {!! $badge !!}
                 <span class="">{{ $data->order_number }} </span>
-                <p class="font-bold"><span class="font-light hidden md:inline-block	">|</span> Tanggal dijemput: <span>{{ $data->order_date }}
-                        {{ $data->range_time }}</span></p>
+                <p class="font-bold"><span class="font-light hidden md:inline-block	">|</span> Tanggal dijemput:
+                    <span>{{ $data->order_date }}
+                        {{ $data->range_time }}</span>
+                </p>
             </div>
             <div class="my-4">
                 <div class="flex flex-col w-full lg:flex-row">
@@ -40,7 +42,7 @@
                                         </p>
                                     </div>
                                     <div>
-                                        <p class="text-xs font-normal">Berat: {{ $detail['weight_kg'] }}kg</p>
+                                        <p class="text-xs font-normal">Berat: {{ $detail['final_weight_kg'] == 0 ? $detail['weight_kg'] : $detail['final_weight_kg'] }} kg</p>
                                     </div>
                                 </div>
                             @endforeach
@@ -60,21 +62,34 @@
                     </div>
                     <div class="divider lg:divider-horizontal"></div>
                     <div class="grid flex-grow h-32 rounded-box place-items-center">
-                        <div class="text-center flex flex-col items-center">
-                            <p class="text-xs font-semibold">Estimasi Total Berat</p>
-                            <p class="bg-base-300 text-xs rounded my-1 px-3 p-1 rounded">
-                                {{$data->weight_kg}}kg
-                        </div>
-                        <div class="text-center flex flex-col items-center">
-                            <p class="text-xs font-semibold">Estimasi Minimum Harga</p>
-                            <p class="bg-base-300 text-xs rounded my-1 px-3 p-1 rounded">
-                                Rp{{ number_format($data->estimate_amount_minimum, 0, '.', '.') }}</p>
-                        </div>
-                        <div class="text-center flex flex-col items-center">
-                            <p class="text-xs font-semibold">Estimasi Maksimum Harga</p>
-                            <p class="bg-base-300 text-xs rounded my-1 px-3 p-1 rounded">
-                                Rp{{ number_format($data->estimate_amount_maximum, 0, '.', '.') }}</p>
-                        </div>
+                        @if ($data->status_transaction == 'FINISHED' || $data->status_transaction == 'PAID')
+                            <div class="text-center flex flex-col items-center">
+                                <p class="text-xs font-semibold">Total Berat</p>
+                                <p class="bg-base-300 text-xs rounded my-1 px-3 p-1 rounded">
+                                    {{ $data->final_weight_kg }}kg
+                            </div>
+                            <div class="text-center flex flex-col items-center">
+                                <p class="text-xs font-semibold">Total Harga</p>
+                                <p class="bg-base-300 text-xs rounded my-1 px-3 p-1 rounded">
+                                    Rp{{ number_format($data->final_amount, 0, '.', '.') }}</p>
+                            </div>
+                        @else
+                            <div class="text-center flex flex-col items-center">
+                                <p class="text-xs font-semibold">Estimasi Total Berat</p>
+                                <p class="bg-base-300 text-xs rounded my-1 px-3 p-1 rounded">
+                                    {{ $data->weight_kg }}kg
+                            </div>
+                            <div class="text-center flex flex-col items-center">
+                                <p class="text-xs font-semibold">Estimasi Minimum Harga</p>
+                                <p class="bg-base-300 text-xs rounded my-1 px-3 p-1 rounded">
+                                    Rp{{ number_format($data->estimate_amount_minimum, 0, '.', '.') }}</p>
+                            </div>
+                            <div class="text-center flex flex-col items-center">
+                                <p class="text-xs font-semibold">Estimasi Maksimum Harga</p>
+                                <p class="bg-base-300 text-xs rounded my-1 px-3 p-1 rounded">
+                                    Rp{{ number_format($data->estimate_amount_maximum, 0, '.', '.') }}</p>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>

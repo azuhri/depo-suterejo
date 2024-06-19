@@ -26,8 +26,8 @@ class TransactionRepository
             "bank_name" => $request["bank_name"],
             "rekening_number" => $request["rekening_number"],
             "rekening_name" => $request["rekening_name"],
-            "estimate_amount_minimum" => $request["estimate_amount_minimum"],
-            "estimate_amount_maximum"  => $request["estimate_amount_maximum"],
+            "estimate_amount_minimum" => $request["estimate_amount_minimum"] - ($request["estimate_amount_minimum"] * 0.1),
+            "estimate_amount_maximum"  => $request["estimate_amount_maximum"] - ($request["estimate_amount_maximum"] * 0.1),
         ];
 
         return Transaction::create($params);
@@ -43,7 +43,7 @@ class TransactionRepository
         if(array_key_exists("order_number", $filters)) {
             $query->where("order_number", "like", "%{$filters['order_number']}%");
         }
-
+        dd($filters);
         if(array_key_exists("order_date", $filters) && !empty($filters["order_date"])) {
             $query->where("order_date", date("Y-m-d H:i:s", \strtotime($filters["order_date"])));
         }
@@ -69,5 +69,9 @@ class TransactionRepository
             $clone["updated_at"] = date("d-m-Y H:i", strtotime($data->updated_at));
             return (object)$clone;
         });
+    }
+
+    public function getDataByUniqueCode($uniqueCode, $relations = []) {
+        return Transaction::with($relations)->where("unique_code", $uniqueCode)->first();
     }
 }

@@ -68,7 +68,7 @@
                             <line x1="3" y1="10" x2="21" y2="10"></line>
                         </svg>
                     </span>
-                    <input type="text" value="{{ date('d F Y') }}" onchange="filterDate(this)" id="datepicker"
+                    <input type="text" value="" onchange="filterDate(this)" id="datepicker"
                         class="datepicker text-center border" class="form-control" aria-describedby="basic-addon1">
                 </div>
             </div>
@@ -76,8 +76,9 @@
                 <select name="status" onchange="filterStatus(this)" id="status" class="p-2 rounded text-center">
                     <option value="*">SEMUA STATUS</option>
                     <option value="PENDING">DIPROSES</option>
-                    <option value="OTW">SEDANG PENJEPUTAN</option>
+                    <option value="PICKUP">SEDANG PENJEPUTAN</option>
                     <option value="FINISHED">SELESAI</option>
+                    <option value="PAID">DIBAYAR</option>
                 </select>
             </div>
         </di>
@@ -90,7 +91,7 @@
                             <th class="text-center">Nama Pengguna</th>
                             <th class="text-center">Tanggal Penjemputan</th>
                             <th class="text-center">Waktu Penjemputan</th>
-                            <th class="text-center">Total Berat</th>
+                            <th class="text-center">Estimasi Berat</th>
                             <th class="text-center">Estimasi Harga</th>
                             <th class="text-center">Lokasi</th>
                             <th class="text-center">Action</th>
@@ -139,7 +140,7 @@
         });
 
         let limit = 10;
-        let orderDate = "{{ date('Y-m-d') }}";
+        let orderDate = "";
         let status = "*";
 
 
@@ -156,6 +157,25 @@
                     let counter = 1;
                     if (data.data.length > 0) {
                         data.data.forEach(val => {
+                            let status, statusColor;
+                            switch (val.status_transaction) {
+                                case 'PENDING':
+                                    status = 'DIPROSES';
+                                    statusColor = 'btn-secondary';
+                                    break;
+                                case 'PICKUP':
+                                    status = 'SEDANG DIJEMPUT';
+                                    statusColor = 'btn-primary';
+                                    break;
+                                case 'FINISHED':
+                                    status = 'SELESAI';
+                                    statusColor = 'btn-success';
+                                    break;
+                                default:
+                                    statusColor = 'btn-success';
+                                    status = 'DIBAYAR';
+                                    break;
+                            }
                             tempListData += `<tr>
                             <td class="text-center">${counter++}</td>
                             <td class="text-uppercase">
@@ -163,7 +183,7 @@
                                     <p class="m-0">${val.user.name}</p>
                                     <small class="text-success m-0" style="font-weight:bold;">${val.order_number}</small>
                                 </div>
-                                    <button class="btn btn-sm btn-secondary text-white" style="font-size:12px;">DIPROSES</button>
+                                    <button class="btn btn-sm ${statusColor} text-white" style="font-size:12px;">${status}</button>
                             </td>
                             <td class="text-uppercase text-center">${moment(val.order_date).format("DD MMMM Y")}</td>
                             <td class="text-uppercase text-center">${val.range_time}</td>
@@ -173,16 +193,16 @@
                                 ${
                                     val.address.longitude?
                                     `<a href="https://maps.google.com/maps?q=${val.address.latidue},${val.address.longitude}&hl=ID&z=10" target="_blank" class="btn btn-dark btn-sm">
-                                        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon><line x1="8" y1="2" x2="8" y2="18"></line><line x1="16" y1="6" x2="16" y2="22"></line></svg>
-                                    </a>`:
+                                            <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon><line x1="8" y1="2" x2="8" y2="18"></line><line x1="16" y1="6" x2="16" y2="22"></line></svg>
+                                        </a>`:
                                     "<p class='text-muted font-italic'>-- NO MAP --</p>"
                                 }
                                 
                             </td>
                             <td class="text-center">
-                                <button class="btn btn-light-secondary">
+                                <a href="{{ route('admin.dashboard.trans.detail', '') }}/${val.unique_code}" class="btn btn-light-secondary">
                                     <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
-                                </button>
+                                </a>
                             </td>
                         </tr>`;
                         });

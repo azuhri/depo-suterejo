@@ -249,10 +249,10 @@
                                         <span class="text-muted">{{ Auth::guard('admins')->user()->email }}</span>
                                     </div>
                                 </div>
-                                <div class="list-group m-2 mb-3">
+                                {{-- <div class="list-group m-2 mb-3">
                                     <a class="list-group-item list-group-item-action border-0"
                                         href="page-profile.html"><i class="w30 fa fa-user"></i>My Profile</a>
-                                </div>
+                                </div> --}}
                                 <button href="javascript:void(0)" onclick="openModal('modalLogout');"
                                     class="btn bg-secondary d-flex justify-content-center align-items-center text-light text-uppercase rounded-0">
                                     <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor"

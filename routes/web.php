@@ -91,6 +91,11 @@ Route::prefix("admin")->name("admin.")->group(function () {
             Route::prefix("data-transaksi")->controller(DataTransaction::class)
                 ->name("trans.")
                 ->group(function () {
+                    Route::get("detail/{id}", "detail")->name("detail");
+                    Route::get("scale-trash", "scalling")->name("scalling");
+                    Route::post("scale-trash/{detailTrxId}", "postDataWeight")->name("post.weight");
+                    Route::get("pickup-order/{id}", "pickupOrder")->name("pickup");
+                    Route::get("finish-order/{id}", "finishedOrder")->name("finish");
                     Route::get("/datatable", "getDatatable")->name("datatable");
                 });
 
