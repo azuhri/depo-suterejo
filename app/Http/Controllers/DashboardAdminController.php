@@ -6,6 +6,7 @@ use App\Http\Services\TrashCategoryService;
 use App\Http\Services\TrashService;
 use App\Http\Services\UserService;
 use App\Models\Transaction;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -27,11 +28,13 @@ class DashboardAdminController extends Controller
 
     public function adminDashboardView()
     {
+        $thisMonth = Carbon::now()->firstOfMonth();
         return view("app.admin.dashboard", [
             "totalUsers" => count($this->userService->getAllUser()),
             "totalTrashCategories" => count($this->trashCategoryService->getAllTrashCategory()),
             "totalTransaction" => Transaction::count(),
             "totalTrashes" => count($this->trashService->getAllTrash("id","DESC")),
+            "total_weight_this_month" => Transaction::where("created_at",">=", $thisMonth)->sum("final_weight_kg"),
         ]);
     }
 

@@ -25,10 +25,9 @@
                             <div class="stat-value">{{ count($finished_transactions) }}</div>
                             <div class="stat-desc">Transaksi</div>
                         </div>
-
                         <div class="stat flex justify-center flex-col items-center">
                             <div class="stat-title">Total Pendapatan</div>
-                            <div class="stat-value">0</div>
+                            <div class="stat-value">{{number_format($revenue, 0, ".", ".")}}</div>
                             <div class="stat-desc">Rupiah</div>
                         </div>
                     </div>
@@ -117,7 +116,7 @@
                     .catch(error => {
                         console.error("Fetch error:", error);
                     });
-            }, 1000);
+            }, 200);
         }
 
         getDatatable();

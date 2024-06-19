@@ -22,7 +22,7 @@
             <!-- start: link -->
             <ul class="header-right justify-content-end d-flex align-items-center mb-0">
                 <!-- start: notifications dropdown-menu -->
-                <li>
+                {{-- <li>
                     <div class="dropdown morphing scale-left notifications">
                         <a class="nav-link dropdown-toggle after-none" href="#" role="button"
                             data-bs-toggle="dropdown">
@@ -203,9 +203,9 @@
                             </div>
                         </div>
                     </div>
-                </li>
+                </li> --}}
                 <!-- start: quick light dark -->
-                <li class="d-none d-xl-inline-block">
+                {{-- <li class="d-none d-xl-inline-block">
                     <a class="nav-link fullscreen" href="javascript:void(0);"
                         onclick="toggleFullScreen(documentElement)">
                         <svg viewBox="0 0 16 16" width="18px" fill="currentColor"
@@ -216,7 +216,7 @@
                                 d="M10.5253 5.97439C10.3927 5.97439 10.2655 5.92173 10.1718 5.82799C10.078 5.73423 10.0254 5.60708 10.0254 5.47449C10.0254 5.34191 10.078 5.21476 10.1718 5.12099L14.2678 1.02499H11.4998C11.3672 1.02499 11.24 0.972315 11.1462 0.878547C11.0525 0.784779 10.9998 0.657602 10.9998 0.524994C10.9998 0.392386 11.0525 0.265209 11.1462 0.17144C11.24 0.0776723 11.3672 0.0249939 11.4998 0.0249939H15.4748C15.6074 0.0249939 15.7346 0.0776723 15.8283 0.17144C15.9221 0.265209 15.9748 0.392386 15.9748 0.524994V4.49999C15.9748 4.6326 15.9221 4.75978 15.8283 4.85355C15.7346 4.94732 15.6074 4.99999 15.4748 4.99999C15.3422 4.99999 15.215 4.94732 15.1212 4.85355C15.0275 4.75978 14.9748 4.6326 14.9748 4.49999V1.73199L10.8788 5.82799C10.785 5.92173 10.6579 5.97439 10.5253 5.97439Z" />
                         </svg>
                     </a>
-                </li>
+                </li> --}}
                 <!-- start: quick light dark -->
                 <li>
                     <a class="nav-link quick-light-dark" href="#">

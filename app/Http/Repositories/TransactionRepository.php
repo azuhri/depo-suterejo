@@ -43,7 +43,6 @@ class TransactionRepository
         if(array_key_exists("order_number", $filters)) {
             $query->where("order_number", "like", "%{$filters['order_number']}%");
         }
-        dd($filters);
         if(array_key_exists("order_date", $filters) && !empty($filters["order_date"])) {
             $query->where("order_date", date("Y-m-d H:i:s", \strtotime($filters["order_date"])));
         }

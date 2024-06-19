@@ -6,6 +6,7 @@
 
 @section('css')
     <link rel="stylesheet" href="{{ asset('/cssbundle/sweetalert2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('/cssbundle/dropify.min.css') }}">
     {{-- <link rel="stylesheet" href="{{ asset('/cssbundle/dataTables.min.css') }}">
     <link href="https://unpkg.com/gijgo@1.9.14/css/gijgo.min.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet"
@@ -246,27 +247,31 @@
                                             @php
                                                 $totalHarga = 0;
                                                 foreach ($transaction->detail as $detail) {
-                                                    $totalHarga += $detail->trash->maximum_price * $detail->final_weight_kg;
+                                                    $totalHarga +=
+                                                        $detail->trash->maximum_price * $detail->final_weight_kg;
                                                 }
-                                                $finalPrice = $totalHarga - ($totalHarga *0.1);
+                                                $finalPrice = $totalHarga - $totalHarga * 0.1;
                                             @endphp
                                             @if ($transaction->isFinishedScales())
                                                 <tr>
                                                     <td colspan="2" class="text-left">Total Harga</td>
                                                     <td colspan="3" class="total-line">
-                                                        <div id="total">Rp {{number_format($totalHarga, 0, ".", ".")}}</div>
+                                                        <div id="total">Rp
+                                                            {{ number_format($totalHarga, 0, '.', '.') }}</div>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td colspan="2" class="text-left">Biaya Admin (10%)</td>
                                                     <td colspan="3" class="total-line">
-                                                        <div id="total">Rp {{number_format($totalHarga * 0.1, 0, ".", ".")}}</div>
+                                                        <div id="total">Rp
+                                                            {{ number_format($totalHarga * 0.1, 0, '.', '.') }}</div>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td colspan="2" class="text-left balance">Total Harga Akhir</td>
                                                     <td colspan="3" class="total-line balance">
-                                                        <div class="due">Rp {{number_format($finalPrice, 0, ".", ".")}}</div>
+                                                        <div class="due">Rp
+                                                            {{ number_format($finalPrice, 0, '.', '.') }}</div>
                                                     </td>
                                                 </tr>
                                             @endif
@@ -282,6 +287,16 @@
                                 @endif
                             </div>
                         </div>
+                        @if ($transaction->status_transaction == 'FINISHED' || $transaction->status_transaction == "PAID")
+                            <div class="p-4">
+                                <label class="my-2" for="payment_doc">Upload Bukti Pembayaran</label>
+                                <div class="">
+                                    <input onchange="uploadPaymentDoc();" type="file" id="payment_doc" data-default-file='{{url('/')."/".$transaction->payment_doc_path}}' class="dropify" data-max-file-size="1M" data-allowed-file-extensions="png jpg jpeg" />
+                                    <small class="text-muted my-1"> <i> Gambar bukti pembayaran harus berupa <span
+                                                class="text-danger">(png, jpg, jpeg)</span></i></small>
+                                </div>
+                            </div>
+                        @endif
                     </div>
                 </div>
                 <div class="col-12 text-center text-md-end">
@@ -356,6 +371,7 @@
 @endsection
 @push('scripts')
     <script src="{{ asset('js/bundle/sweetalert2.bundle.js') }}"></script>
+    <script src="{{ asset('js/bundle/dropify.bundle.js') }}"></script>
     {{-- <script src="{{ asset('js/bundle/dataTables.bundle.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.10.0/js/bootstrap-datepicker.min.js"
         integrity="sha512-LsnSViqQyaXpD4mBBdRYeP6sRwJiJveh2ZIbW41EBrNmKxgr/LFZIiWT6yr+nycvhvauz8c2nYMhrP80YhG7Cw=="
@@ -364,6 +380,7 @@
         integrity="sha512-4F1cxYdMiAW98oomSLaygEwmCnIP38pb4Kx70yQYqRwLVCs3DbRumfBq82T08g/4LJ/smbFGFpmeFlQgoDccgg=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
     <script>
+        let dropify = $('#payment_doc').dropify();
         const pickupOrder = () => {
             Swal.fire({
                 position: 'center',
@@ -434,19 +451,20 @@
         const saveWeight = (self) => {
             let detailTrxId = $("#detailTrxId").val();
             $.ajax({
-                url: '{{ route('admin.dashboard.trans.scalling', '') }}/'+detailTrxId, // Ganti dengan URL API Anda
+                url: '{{ route('admin.dashboard.trans.scalling', '') }}/' +
+                    detailTrxId, // Ganti dengan URL API Anda
                 type: 'POST',
                 data: {
                     weight: $('#weight_fix').val(),
-                    _token: '{{csrf_token()}}'
+                    _token: '{{ csrf_token() }}'
                 },
-                beforeSend: function () {
+                beforeSend: function() {
                     $(self).html(`<div class="spinner-border spinner-border-sm" role="status">
                     <span class="visually-hidden">Loading...</span>
                     </div>`);
                 },
                 success: function(response) {
-                $("#scalingTrashModal").modal("hide");
+                    $("#scalingTrashModal").modal("hide");
                     setTimeout(() => {
                         location.reload();
                     }, 300);
@@ -454,6 +472,38 @@
                 error: function(error) {
                     // Tindakan jika permintaan gagal
                     console.error(error);
+                }
+            });
+        }
+
+        const uploadPaymentDoc = () => {
+            let dataForm = new FormData();
+            let payementDoc = $("#payment_doc")[0].files[0];
+            dataForm.append("payment_doc", payementDoc);
+            dataForm.append("_token", '{{csrf_token()}}');
+            $.ajax({
+                url: '{{ route("admin.dashboard.trans.upload.payment-doc", $transaction->unique_code) }}',
+                type: "POST",
+                contentType: false, // Tidak mengatur header konten
+                processData: false, // Tidak memproses data
+                async: true,
+                dataType: "json",
+                data: dataForm,
+                success: function(res) {
+                    setTimeout(() => {
+                        location.reload();
+                    }, 300);
+                },
+                error: function(err) {
+                    vt.warn(err.responseJSON.errors, {
+                        title: "Peringatan",
+                        position: "top-right",
+                        // position: toastPosition.TopCenter,
+                        duration: 4000,
+                        closable: false,
+                        focusable: false,
+                        callback: undefined
+                    })
                 }
             });
         }

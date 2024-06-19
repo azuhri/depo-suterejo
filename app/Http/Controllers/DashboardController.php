@@ -9,6 +9,7 @@ use App\Http\Services\JsonServices;
 use App\Http\Services\TransactionService;
 use App\Http\Services\UserService;
 use App\Models\AssetTransaction;
+use App\Models\Transaction;
 use App\Models\TransactionDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -179,6 +180,7 @@ class DashboardController extends Controller
                 "user_id" => Auth::user()->id,
                 "status_transaction" => "FINISHED",
             ]),
+            "revenue" => Transaction::where("user_id", Auth::id())->where("status_transaction", "PAID")->sum("final_amount"),
         ]);
     }
 

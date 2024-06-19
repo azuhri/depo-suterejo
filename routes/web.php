@@ -94,6 +94,7 @@ Route::prefix("admin")->name("admin.")->group(function () {
                     Route::get("detail/{id}", "detail")->name("detail");
                     Route::get("scale-trash", "scalling")->name("scalling");
                     Route::post("scale-trash/{detailTrxId}", "postDataWeight")->name("post.weight");
+                    Route::post("upload-payment-doc/{id}", "uploadPaymentDoc")->name("upload.payment-doc");
                     Route::get("pickup-order/{id}", "pickupOrder")->name("pickup");
                     Route::get("finish-order/{id}", "finishedOrder")->name("finish");
                     Route::get("/datatable", "getDatatable")->name("datatable");

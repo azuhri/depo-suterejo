@@ -3,18 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Http\Repositories\TransactionRepository;
+use App\Http\Services\FileManagementService;
 use App\Models\Transaction;
 use App\Models\TransactionDetail;
 use App\Models\Weight;
+use Exception;
 use Illuminate\Http\Request;
 
 class DataTransaction extends Controller
 {
     public $transaction;
+    public FileManagementService $fileService;
     public function __construct(
         TransactionRepository $transaction,
+        FileManagementService $fileService,
     ) {
         $this->transaction = $transaction;
+        $this->fileService = $fileService;
     }
 
     public function getDatatable(Request $request)
@@ -127,6 +132,36 @@ class DataTransaction extends Controller
             return \response()->json(["success" => true]);
         } catch (\Throwable $th) {
             return \response()->json(["message" => $th->getMessage()], 400);
+        }
+    }
+
+    public function uploadPaymentDoc(Request $request, $uniqueCode) {
+        try {
+            $request->validate([
+                "payment_doc" => ["required", "mimes:png,jpg,jpeg"]
+            ], [
+                "payment_doc.mimes" => "file bukti pembayaran harus berbentuk extension jpg/png/jpeg"
+            ]);
+            $findTrx = $this->transaction->getDataByUniqueCode($uniqueCode);
+            if (!$findTrx) {
+                throw new Exception("data trx not found");
+            }
+            if($findTrx->payment_doc_path) {
+                $this->fileService->destroyFile($findTrx->payment_doc_path);
+            }
+            $path = $this->fileService->storeFile(
+                $request->file("payment_doc"),
+                "dynamic_assets/payment_doc/",
+                $request->name
+            );
+            $findTrx->payment_doc_path = $path;
+            $findTrx->status_transaction = "PAID";
+            $findTrx->is_paid = \true;
+            $findTrx->update();
+
+            return \response()->json(["success" => true]);
+        } catch (\Throwable $th) {
+            return \response()->json(["errors" => $th->getMessage()], 400);
         }
     }
 }

@@ -42,7 +42,9 @@
                                         </p>
                                     </div>
                                     <div>
-                                        <p class="text-xs font-normal">Berat: {{ $detail['final_weight_kg'] == 0 ? $detail['weight_kg'] : $detail['final_weight_kg'] }} kg</p>
+                                        <p class="text-xs font-normal">Berat:
+                                            {{ $detail['final_weight_kg'] == 0 ? $detail['weight_kg'] : $detail['final_weight_kg'] }}
+                                            kg</p>
                                     </div>
                                 </div>
                             @endforeach
@@ -54,11 +56,27 @@
                             <div class="collapse-content">
                                 <div class="flex gap-1">
                                     @foreach ($data->assets as $asset)
-                                        <img class="w-1/3" src="{{ asset($asset['path_image']) }}" alt="">
+                                        <a href="{{ asset($asset['path_image']) }}" target="_blank">
+                                            <img class="w-1/3" src="{{ asset($asset['path_image']) }}" alt="">
+                                        </a>
                                     @endforeach
                                 </div>
                             </div>
                         </div>
+                        @if ($data->status_transaction == 'PAID')
+                            <div tabindex="0" class="collapse collapse-arrow border border-base-200 bg-base-500 my-2">
+                                <div class="collapse-title text-xl font-medium">
+                                    <p class="text-xs mt-2 mb-4">Bukti Pembayaran: </p>
+                                </div>
+                                <div class="collapse-content">
+                                    <a href="{{ asset($data->payment_doc_path) }}" target="_blank">
+                                        <img class="w-1/3" src="{{ asset($data->payment_doc_path) }}" alt="">
+                                    </a>
+                                    <div class="flex gap-1">
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
                     </div>
                     <div class="divider lg:divider-horizontal"></div>
                     <div class="grid flex-grow h-32 rounded-box place-items-center">
@@ -73,6 +91,12 @@
                                 <p class="bg-base-300 text-xs rounded my-1 px-3 p-1 rounded">
                                     Rp{{ number_format($data->final_amount, 0, '.', '.') }}</p>
                             </div>
+                            @if ($data->status_transaction == 'PAID')
+                                <div class="my-2">
+                                    <a href="{{ asset($data->payment_doc_path) }}" class="text- btn-md btn btn-primary"
+                                        target="_blank">Lihat Bukti Pembayaran</a>
+                                </div>
+                            @endif
                         @else
                             <div class="text-center flex flex-col items-center">
                                 <p class="text-xs font-semibold">Estimasi Total Berat</p>
