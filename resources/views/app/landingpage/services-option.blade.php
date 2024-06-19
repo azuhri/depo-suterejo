@@ -132,6 +132,15 @@
                     </tbody>
                 </table>
             </div>
+            <div class="flex items-center mt-4 w-[500px] lg:w-[1350px] px-4">
+                <div class="form-control">
+                    <label class="label cursor-pointer">
+                        <input type="checkbox" class="checkbox" />
+                        <span class="label-text m-0 ml-2 font-semibold">Pakai timbangan digital</span>
+                    </label>
+                </div>
+                <span class="text-xs mx-4 p-2 px-4 text-white bg-blue-800 rounded-lg font-bold">REKOMENDASI</span>
+            </div>
             <div class="w-[500px] lg:w-[1350px] px-6 my-4">
                 <button onclick="submitData(this);"
                     class="bg-primary text-white p-3 px-6 float-right flex justify-evenly text-center rounded-xl">
@@ -298,7 +307,7 @@
             }
 
             let files = pond.getFiles();
-            if(!files.length) {
+            if (!files.length) {
                 vt.warn(`Maaf silahkan upload minimal 1 gambar sampah yang ingin diserahkan...`, {
                     title: "Peringatan",
                     position: "top-right",
@@ -313,12 +322,12 @@
 
             let dataForm = new FormData();
             dataForm.append("trashes", JSON.stringify(dataTrash));
-            dataForm.append("_token", "{{csrf_token()}}")
+            dataForm.append("_token", "{{ csrf_token() }}")
             for (let i = 0; i < files.length; i++) {
                 let file = files[i].file
-                dataForm.append("image_"+i, file)
+                dataForm.append("image_" + i, file)
             }
-            
+
 
             $.ajax({
                 url: '{{ route('account.services.post') }}',
@@ -342,7 +351,7 @@
                     //     callback: undefined
                     // })
                     setTimeout(() => {
-                        window.location.href="{{route('account.services.next.index')}}";
+                        window.location.href = "{{ route('account.services.next.index') }}";
                     }, 2000);
                 },
                 error: function(err) {
