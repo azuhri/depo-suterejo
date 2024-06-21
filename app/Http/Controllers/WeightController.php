@@ -13,17 +13,16 @@ class WeightController extends Controller
             'weight' => 'required|numeric',
         ]);
 
-        // $weight = Weight::create([
-        //     'weight' => $validatedData['weight'],
-        // ]);
         $weight = Weight::first();
         if (!$weight) {
             $weight = new Weight();
             $weight->weight = $validatedData['weight'];
             $weight->save();
         } else {
-            $weight->weight = $validatedData['weight'];
-            $weight->update();
+            if($validatedData['weight'] > 0) {
+                $weight->weight = $validatedData['weight'];
+                $weight->update();
+            }
         }
         return response()->json($weight, 201);
     }
