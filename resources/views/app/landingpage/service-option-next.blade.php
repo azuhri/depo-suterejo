@@ -100,26 +100,28 @@
                                 <div class="flex justify-between my-4">
                                     <div class="flex flex-col">
                                         <p class="text-sm text-primary uppercase font-semibold">{{ $trash->name }}</p>
-                                        <p class="text-xs font-normal">Berat: {{ $trash->weight }}kg</p>
-                                    </div>
-                                    <div>
-                                        <p class="text-xs font-bold">
-                                            <span
-                                                class="border border-red-500 p-1 px-2 rounded-lg bg-red-100 text-red-500">Rp.{{ number_format($trash->minPrice, 0, '.', '.') }}
-                                            </span>
-                                            <span class="mx-1">s.d</span>
-                                            <span
-                                                class="border border-green-500 p-1 px-2 rounded-lg bg-green-100 text-green-500">Rp.{{ number_format($trash->maxPrice, 0, '.', '.') }}
-                                            </span>
-                                        </p>
+                                        <div class="my-2 flex items-center">
+                                            <p class="text-xs font-normal">Berat: {{ $trash->weight }}kg</p>
+                                            <p class="mx-2">|</p>
+                                            <p class="text-xs font-bold">
+                                                Harga:
+                                                <span
+                                                    class="border border-red-500 p-1 px-2 rounded-lg bg-red-100 text-red-500">Rp.{{ number_format($trash->minPrice, 0, '.', '.') }}
+                                                </span>
+                                                <span class="mx-1">s.d</span>
+                                                <span
+                                                    class="border border-green-500 p-1 px-2 rounded-lg bg-green-100 text-green-500">Rp.{{ number_format($trash->maxPrice, 0, '.', '.') }}
+                                                </span>
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
                             @endforeach
                             <div class="my-4 text-center bg-blue-500 text-white p-3 rounded-lg font-semibold text-sm">
                                 Biaya Layanan Dikenakan Ke Pengguna Sebesar 10%
                             </div>
-                            <div class="flex justify-between my-4">
-                                <p class="text-sm text-primary uppercase font-semibold">Total Estimasi Penjualan</p>
+                            <div class="flex justify-between my-4 flex flex-col">
+                                <p class="text-sm text-primary uppercase font-semibold mb-2">Total Estimasi Penjualan: </p>
                                 <div>
                                     <p class="text-xs font-bold">
                                         <span
@@ -132,8 +134,8 @@
                                     </p>
                                 </div>
                             </div>
-                            <div class="flex justify-between my-4">
-                                <p class="text-sm text-primary uppercase font-semibold">Biaya Aplikasi</p>
+                            <div class="flex justify-between my-4 flex flex-col">
+                                <p class="text-sm text-primary uppercase font-semibold mb-2">Biaya Aplikasi: </p>
                                 <div>
                                     <p class="text-xs font-bold">
                                         <span
@@ -146,8 +148,8 @@
                                     </p>
                                 </div>
                             </div>
-                            <div class="flex justify-between my-4">
-                                <p class="text-sm text-primary uppercase font-semibold">Total Estimasi Pendapatan</p>
+                            <div class="flex justify-between my-4 flex flex-col">
+                                <p class="text-sm text-primary uppercase font-semibold mb-2">Total Estimasi Pendapatan: </p>
                                 <div>
                                     <p class="text-xs font-bold">
                                         <span

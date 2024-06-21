@@ -121,10 +121,10 @@
                     <!-- head -->
                     <thead>
                         <tr class="text-center text-black">
-                            {{-- <th>No</th> --}}
-                            <th>Jenis Sampah</th>
-                            <th>Berat</th>
-                            <th>Estimasi Harga</th>
+                            <th>Nama Item</th>
+                            {{-- <th>Jenis Sampah</th> --}}
+                            {{-- <th>Berat</th> --}}
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody class="text-primary" id="body_table_list">
@@ -241,10 +241,18 @@
             let TotalMaxPrice = 0;
             array.forEach(val => {
                 tempElement += `<tr>
-                      <td>${val.name.toUpperCase()}</td>
-                      <td class="text-center"><span class="text-xs bg-blue-100  border border-blue-500 text-blue-500 p-1 px-3 rounded-lg">${val.weight} Kg</span></td>
-                      <td class="text-center"><span class="text-xs bg-red-100  border border-red-500 text-red-500 p-1 px-3 rounded-lg">Rp ${convertToRupiah(val.minPrice)}</span> - <span class="text-xs bg-green-100 border border-green-500 text-green-500 p-1 px-3 rounded-lg"> Rp${convertToRupiah(val.maxPrice)}</span></td>
                       <td>
+                        <div class="flex flex-col">
+                            ${val.name.toUpperCase()}
+                            <div class="text-xs font-light mt-2">
+                                Berat: <span class="text-xs text-blue-500">${val.weight} Kg</span>
+                            </div>
+                            <div class="mt-2">
+                                <span class="text-xs bg-red-100  border border-red-500 text-red-500 p-1 px-3 rounded-lg">Rp ${convertToRupiah(val.minPrice)}</span> - <span class="text-xs bg-green-100 border border-green-500 text-green-500 p-1 px-3 rounded-lg"> Rp${convertToRupiah(val.maxPrice)}</span>
+                            </div>
+                        </div>
+                      </td>
+                      <td class="text-center">
                             <button onclick="deleteDataArrayById(${parseInt(val.id)})" class="p-2 rounded-lg bg-red-100 text-red-500">
                                 <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
                             </button>
@@ -256,10 +264,18 @@
             });
             tempElement += `
             <tr class="bg-zinc-100 rounded-xl">
-                <td>Total </td>
-                <td class="text-center"><span class="text-xs bg-blue-100  border border-blue-500 text-blue-500 p-1 px-3 rounded-lg">${totalBerat} Kg</span></td>
-                <td class="text-center"><span class="text-xs bg-red-100  border border-red-500 text-red-500 p-1 px-3 rounded-lg">Rp ${convertToRupiah(totalMinPrice)}</span> - <span class="text-xs bg-green-100 border border-green-500 text-green-500 p-1 px-3 rounded-lg"> Rp${convertToRupiah(TotalMaxPrice)}</span></td>
-                <td onclick="deleteAllData();"><button class="font-semibold text-xs text-red-500">Hapus Semua</button></td>
+                <td>
+                    <div class="flex flex-col">
+                        Total
+                    </div>
+                    <div class="text-xs font-light mt-2">
+                        Berat: <span class="text-xs text-blue-500">${totalBerat} Kg</span>
+                    </div>
+                    <div class="mt-2">
+                        <span class="text-xs bg-red-100  border border-red-500 text-red-500 p-1 px-3 rounded-lg">Rp ${convertToRupiah(totalMinPrice)}</span> - <span class="text-xs bg-green-100 border border-green-500 text-green-500 p-1 px-3 rounded-lg"> Rp${convertToRupiah(TotalMaxPrice)}</span>
+                    </div>
+                </td>
+                <td onclick="deleteAllData();" class="text-center"><button class="text-center font-semibold text-xs text-red-500">Hapus Semua</button></td>
             </tr>`
             $("#body_table_list").html(tempElement);
             $("#container_list").slideDown(200);
