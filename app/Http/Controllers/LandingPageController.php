@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Services\TrashCategoryService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
 
 class LandingPageController extends Controller
 {
@@ -37,5 +38,18 @@ class LandingPageController extends Controller
         return view("app.landingpage.services-option", [
             "trashCategory" => $trashCategory,
         ]);
+    }
+
+    public function blogView() {
+        return view("app.landingpage.blog");
+    }
+
+    public function blogViewDetail($viewName) {
+        $viewName = "app.landingpage.blogs.{$viewName}";
+        if (!View::exists($viewName)) {
+            \abort(404);
+        }
+
+        return view($viewName);
     }
 }

@@ -285,6 +285,23 @@
                                         <textarea class="form-control bg-light" disabled>Setiap transaksi dikenakan potongan biaya admin 10%</textarea>
                                     </div>
                                 @endif
+
+                                @if ($transaction->status_transaction == 'FINISHED' || $transaction->status_transaction == "PAID")
+                                    <div class="mt-4">
+                                        <div class="my-1">
+                                            <p class="m-0">Nama Bank/E-Wallet</p>
+                                            <p style="font-weight: bold">{{$transaction->bank_name}}</p>
+                                        </div>
+                                        <div class="mb-1">
+                                            <p class="m-0">No Rekening/ No HP</p>
+                                            <p style="font-weight: bold">{{$transaction->rekening_number}}</p>
+                                        </div>
+                                        <div class="mb-1">
+                                            <p class="m-0">Nama Penerima</p>
+                                            <p style="font-weight: bold">{{$transaction->rekening_name}}</p>
+                                        </div>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                         @if ($transaction->status_transaction == 'FINISHED' || $transaction->status_transaction == "PAID")

@@ -33,6 +33,7 @@ Route::prefix("landing-page")->name("landing.")->group(function () {
         Route::get("about-us", "aboutusView")->name("aboutus");
         Route::get("services", "servicesView")->name("services");
         Route::get("blog", "blogView")->name("blog");
+        Route::get("blog-detail/{viewName}", "blogViewDetail")->name("blog.detail");
     });
 });
 

@@ -33,7 +33,7 @@
             </li>
             <li
                 class="mx-10  {{ url()->current() == route('landing.blog') ? 'border-b border-' . $secondary . ' pb-1 font-bold' : 'font-medium' }}">
-                <a href="#">Blog</a>
+                <a href="{{route("landing.blog")}}">Blog</a>
             </li>
         </ul>
     </div>

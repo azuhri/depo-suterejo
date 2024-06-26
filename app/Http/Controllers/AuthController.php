@@ -60,7 +60,7 @@ class AuthController extends Controller
     {
         try {
             $maxChar = 50;
-            $minPassword = 12;
+            $minPassword = 8;
             $maxPhonenumber = 12;
             $minPhonenumber = 10;
             $request->validate([

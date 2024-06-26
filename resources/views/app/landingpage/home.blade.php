@@ -101,7 +101,7 @@
                     </p>
                 </div>
                 <div class="flex justify-center w-full">
-                    <a href="#"
+                    <a href="{{route("landing.blog.detail", "blog-1")}}"
                         class="rounded-xl bg-white border border-primary text-primary p-2 mb-6 px-4 text-xs">Baca
                         Selengkapnya</a>
                 </div>
@@ -120,7 +120,7 @@
                     </p>
                 </div>
                 <div class="flex justify-center w-full">
-                    <a href="#"
+                    <a href="{{route("landing.blog.detail", "blog-2")}}"
                         class="rounded-xl bg-white border border-primary text-primary p-2 mb-6 px-4 text-xs">Baca
                         Selengkapnya</a>
                 </div>
@@ -139,7 +139,7 @@
                     </p>
                 </div>
                 <div class="flex justify-center w-full">
-                    <a href="#"
+                    <a href="{{route("landing.blog.detail", "blog-3")}}"
                         class="rounded-xl bg-white border border-primary text-primary p-2 mb-6 px-4 text-xs">Baca
                         Selengkapnya</a>
                 </div>
